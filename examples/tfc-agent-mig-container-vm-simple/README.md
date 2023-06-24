@@ -8,7 +8,7 @@ This example shows how to deploy a Terraform Cloud Agent on GCE Container VM.
 
 1. Create the agent pool in Terraform Cloud by navigating to Organization Setting > Security > Agents > Create Agent Pool.
    [More info here](https://developer.hashicorp.com/terraform/cloud-docs/agents/agent-pools#create-an-agent-pool).
-  
+
 2. Create terraform.tfvars file with the necessary values.
 
     The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
@@ -27,7 +27,7 @@ This example shows how to deploy a Terraform Cloud Agent on GCE Container VM.
     ```
 
 4. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
-  
+
 5. Create a workspace or use an existing workspace to attach the Terraform Cloud Agent.
    [More info here](https://developer.hashicorp.com/terraform/cloud-docs/agents/agent-pools#configure-workspaces-to-use-the-agent).
 

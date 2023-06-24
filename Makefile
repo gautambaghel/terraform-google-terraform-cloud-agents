@@ -25,3 +25,6 @@ docker_generate_docs:
 # Alias for backwards compatibility
 .PHONY: generate_docs
 generate_docs: docker_generate_docs
+
+.PHONY: test_lint
+test_lint: docker_test_lint
