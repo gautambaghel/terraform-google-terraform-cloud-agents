@@ -27,7 +27,6 @@ This example shows how to deploy a Self Hosted TFC Agent on MIG Container VMs.
 | create\_network | When set to true, VPC,router and NAT will be auto created | `bool` | `true` | no |
 | dind | Flag to determine whether to expose dockersock | `bool` | `false` | no |
 | image | The Terraform Agent image | `string` | `"hashicorp/tfc-agent:latest"` | no |
-| instance\_name | The gce instance name | `string` | `"tfc-agent"` | no |
 | network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
 | project\_id | The project id to deploy Terraform Agent | `string` | n/a | yes |
 | region | The GCP region to deploy instances into | `string` | `"us-east4"` | no |
@@ -38,6 +37,9 @@ This example shows how to deploy a Self Hosted TFC Agent on MIG Container VMs.
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
 | subnetwork\_project | The ID of the project in which the subnetwork belongs. If it is not provided, the project\_id is used. | `string` | `""` | no |
 | target\_size | The number of Terraform Cloud Agent instances | `number` | `2` | no |
+| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
+| tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
+| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-container-vm"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
 | tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
 

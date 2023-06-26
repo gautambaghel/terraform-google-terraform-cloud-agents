@@ -4,6 +4,8 @@
 
 This example shows how to deploy TFC Agent on GKE.
 
+It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
+
 ## Steps to deploy this example
 
 1. Create terraform.tfvars file with the necessary values.
@@ -40,12 +42,13 @@ This example shows how to deploy TFC Agent on GKE.
 1. Generate kubeconfig and apply the manifests for Deployment and HorizontalPodAutoscaler.
 
     ```sh
-    $ gcloud container clusters get-credentials $(terraform -raw output cluster_name)
+    $ gcloud container clusters get-credentials $(terraform output -raw cluster_name)
     $ kustomize build . | kubectl apply -f -
     ```
 
-1. Create a workspace or use an existing workspace to attach the Terraform Cloud Agent.
-   [More info here](https://developer.hashicorp.com/terraform/cloud-docs/agents/agent-pools#configure-workspaces-to-use-the-agent).
+1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
+
+1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -53,7 +56,11 @@ This example shows how to deploy TFC Agent on GKE.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | project\_id | The project id to deploy Terraform Cloud Agent | `string` | n/a | yes |
-| tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
+| tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-simple-pool"` | no |
+| tfc\_agent\_pool\_token | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-simple-pool-token"` | no |
+| tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
+| tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP US West GKE"` | no |
+| tfc\_workspace\_name | Terraform Cloud workspace name to be created | `string` | `"tfc-agent-gke-simple"` | no |
 
 ## Outputs
 

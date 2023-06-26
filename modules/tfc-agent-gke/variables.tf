@@ -108,9 +108,14 @@ variable "tfc_agent_address" {
 }
 
 variable "tfc_agent_single" {
-  type        = string
-  description = "Enable single mode. This causes the agent to handle at most one job and immediately exit thereafter. Useful for running agents as ephemeral containers, VMs, or other isolated contexts with a higher-level scheduler or process supervisor"
-  default     = "false"
+  type        = bool
+  default     = false
+  description = <<-EOF
+    Enable single mode. This causes the agent to handle at most one job and
+    immediately exit thereafter. Useful for running agents as ephemeral
+    containers, VMs, or other isolated contexts with a higher-level scheduler
+    or process supervisor.
+  EOF
 }
 
 variable "tfc_agent_auto_update" {

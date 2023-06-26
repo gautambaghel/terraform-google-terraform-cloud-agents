@@ -4,20 +4,18 @@
 
 This example showcases how to use startup scripts to deploy a Terraform Cloud Agent using the `tfc-agent-mig` module.
 
-We use startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online and de-register when shut down.
+It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached using startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online. 
 
 ## Steps to deploy this example
 
-1. Create the agent pool in Terraform Cloud by navigating to Organization Setting > Security > Agents > Create Agent Pool. [More info here](https://developer.hashicorp.com/terraform/cloud-docs/agents/agent-pools#create-an-agent-pool).
-
-2. Create terraform.tfvars file with the necessary values. The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
+1. Create terraform.tfvars file with the necessary values. The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
     project_id = "your-project-id"
     tfc_agent_token   = "your-tfc-agent-token"
     ```
 
-3. Create the infrastructure.
+1. Create the infrastructure.
 
     ```sh
     $ terraform init
@@ -25,9 +23,9 @@ We use startup/shutdown scripts to install the Terraform Cloud Agent binary, reg
     $ terraform apply
     ```
 
-4. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
+1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
 
-5. Create a workspace or use an existing workspace to attach the Terraform Cloud Agent. [More info here](https://developer.hashicorp.com/terraform/cloud-docs/agents/agent-pools#configure-workspaces-to-use-the-agent).
+1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -35,7 +33,11 @@ We use startup/shutdown scripts to install the Terraform Cloud Agent binary, reg
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | project\_id | The project id to deploy Terraform Cloud Agent MIG | `string` | n/a | yes |
-| tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
+| tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-mig-native-simple-pool"` | no |
+| tfc\_agent\_pool\_token | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-mig-native-simple-pool-token"` | no |
+| tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
+| tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP US West"` | no |
+| tfc\_workspace\_name | Terraform Cloud workspace name to be created | `string` | `"tfc-agent-mig-native-simple"` | no |
 
 ## Outputs
 

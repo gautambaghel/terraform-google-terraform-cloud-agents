@@ -59,7 +59,7 @@ resource "google_compute_router_nat" "tfc-agent-nat" {
 resource "google_service_account" "tfc_agent_service_account" {
   count        = var.service_account == "" ? 1 : 0
   project      = var.project_id
-  account_id   = "tfc-agent-service-account"
+  account_id   = "tfc-agent-mig-vm-sa"
   display_name = "Terraform Cloud Agent GCE Service Account"
 }
 

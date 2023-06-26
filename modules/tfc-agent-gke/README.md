@@ -39,7 +39,7 @@ This example shows how to deploy a simple GKE Self Hosted TFC Agent.
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
 | tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC agent on GKE | `string` | `"tfc-agent-k8s-secrets"` | no |
 | tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
-| tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and immediately exit thereafter. Useful for running agents as ephemeral containers, VMs, or other isolated contexts with a higher-level scheduler or process supervisor | `string` | `"false"` | no |
+| tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
 | tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
 | zones | The GCP zone to deploy gke into | `list(string)` | <pre>[<br>  "us-west1-a"<br>]</pre> | no |
 

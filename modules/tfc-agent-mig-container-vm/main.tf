@@ -17,7 +17,13 @@ locals {
   network_name    = var.create_network ? google_compute_network.tfc-agent-network[0].self_link : var.network_name
   subnet_name     = var.create_network ? google_compute_subnetwork.tfc-agent-subnetwork[0].self_link : var.subnet_name
   service_account = var.service_account == "" ? google_service_account.tfc_agent_service_account[0].email : var.service_account
-  # location   = var.regional ? var.region : var.zones[0]
+  instance_name   = "${var.tfc_agent_name_prefix}-${random_string.suffix.result}"
+}
+
+resource "random_string" "suffix" {
+  length  = 4
+  special = false
+  upper   = false
 }
 
 /*****************************************
@@ -64,7 +70,7 @@ resource "google_compute_router_nat" "nat" {
 resource "google_service_account" "tfc_agent_service_account" {
   count        = var.service_account == "" ? 1 : 0
   project      = var.project_id
-  account_id   = "tfc-agent-service-account"
+  account_id   = "tfc-agent-mig-container-vm-sa"
   display_name = "Terrform Agent GCE Service Account"
 }
 
@@ -81,9 +87,6 @@ resource "google_project_iam_binding" "gce" {
 /*****************************************
   TFC Agent GCE Instance Template
  *****************************************/
-locals {
-  instance_name = format("%s-%s", var.instance_name, substr(md5(module.gce-container.container.image), 0, 8))
-}
 
 module "gce-container" {
   source  = "terraform-google-modules/container-vm/google"
@@ -92,8 +95,20 @@ module "gce-container" {
     image = var.image
     env = [
       {
+        name  = "TFC_AGENT_NAME"
+        value = local.instance_name
+      },
+      {
         name  = "TFC_AGENT_TOKEN"
         value = var.tfc_agent_token
+      },
+      {
+        name  = "TFC_ADDRESS"
+        value = var.tfc_agent_address
+      },
+      {
+        name  = "TFC_AGENT_AUTO_UPDATE"
+        value = var.tfc_agent_auto_update
       },
       {
         name  = "TFC_AGENT_SINGLE"
@@ -129,8 +144,8 @@ module "gce-container" {
 module "mig_template" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
   version            = "~> 7.0"
-  project_id         = var.project_id
   region             = var.region
+  project_id         = var.project_id
   network            = local.network_name
   subnetwork         = local.subnet_name
   subnetwork_project = var.subnetwork_project != "" ? var.subnetwork_project : var.project_id
@@ -143,17 +158,17 @@ module "mig_template" {
   disk_size_gb         = 100
   disk_type            = "pd-ssd"
   auto_delete          = true
-  name_prefix          = "tfc-agent"
   source_image_family  = "cos-stable"
   source_image_project = "cos-cloud"
   startup_script       = var.startup_script
+  name_prefix          = var.tfc_agent_name_prefix
   source_image         = reverse(split("/", module.gce-container.source_image))[0]
   metadata = merge(var.additional_metadata, {
     google-logging-enabled      = "true"
     "gce-container-declaration" = module.gce-container.metadata_value
   })
   tags = [
-    "tfc-agent-vm"
+    local.instance_name
   ]
   labels = {
     container-vm = module.gce-container.vm_container_label
@@ -165,12 +180,12 @@ module "mig_template" {
 module "mig" {
   source             = "terraform-google-modules/vm/google//modules/mig"
   version            = "~> 7.0"
+  region             = var.region
   project_id         = var.project_id
   subnetwork_project = var.project_id
-  hostname           = local.instance_name
-  region             = var.region
-  instance_template  = module.mig_template.self_link
   target_size        = var.target_size
+  hostname           = local.instance_name
+  instance_template  = module.mig_template.self_link
 
   /* autoscaler */
   autoscaling_enabled = true
