@@ -1,3 +1,5 @@
+# Copyright (c) HashiCorp, Inc.
+
 name: Makefile CI
 
 on:
@@ -13,9 +15,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Install dependencies
-      run: make
 
     - name: Run Terraform test lint
       run: make test_lint

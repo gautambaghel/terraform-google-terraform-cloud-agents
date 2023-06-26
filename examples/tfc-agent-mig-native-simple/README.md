@@ -4,7 +4,7 @@
 
 This example showcases how to use startup scripts to deploy a Terraform Cloud Agent using the `tfc-agent-mig` module.
 
-It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached using startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online. 
+It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached using startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online.
 
 ## Steps to deploy this example
 
