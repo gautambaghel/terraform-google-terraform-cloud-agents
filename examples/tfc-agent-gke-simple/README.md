@@ -28,6 +28,7 @@ It creates the Terraform Agent pool, registers the agent to that pool and create
 1. Build the example TFC Agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
 
     ```sh
+    $ export PROJECT_ID="your-project-id"
     $ gcloud config set project $PROJECT_ID
     $ gcloud services enable cloudbuild.googleapis.com
     $ gcloud builds submit --config=cloudbuild.yaml
