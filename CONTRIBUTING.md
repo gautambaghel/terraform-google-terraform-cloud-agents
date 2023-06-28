@@ -33,6 +33,7 @@ maintain a standard of quality.
 
 When working with the repository for the first time run pre-commit
 
+Run `pre-commit install`
 Run `pre-commit run --all-files`
 
 ### Execution
