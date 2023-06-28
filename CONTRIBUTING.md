@@ -22,7 +22,7 @@ submodules, and example modules are automatically generated based on
 the `variables` and `outputs` of the respective modules. These tables
 must be refreshed if the module interfaces are changed.
 
-### Documentation
+### Execution
 
 Run `make generate_docs` to generate new Inputs and Outputs tables.
 
