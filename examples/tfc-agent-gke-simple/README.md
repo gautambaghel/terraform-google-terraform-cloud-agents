@@ -6,6 +6,17 @@ This example shows how to deploy Terraform Cloud Agents on Google Kubernetes Eng
 
 It creates the Terraform Cloud agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
 
+## Prerequisites
+
+The tools needed to build this example are available by default in Google Cloud Shell.
+
+If running from your own system, you will need:
+
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+- [Google Cloud CLI (`gcloud`)](https://cloud.google.com/sdk/docs/install-sdk)
+  - [`gke-gcloud-auth-plugin`](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
+- [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
+
 ## Steps to deploy this example
 
 1. Create terraform.tfvars file with the necessary values.
