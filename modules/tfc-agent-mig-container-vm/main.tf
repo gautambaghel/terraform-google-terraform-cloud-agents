@@ -165,7 +165,7 @@ module "mig_template" {
   source_image         = reverse(split("/", module.gce_container.source_image))[0]
   metadata = merge(var.additional_metadata, {
     google-logging-enabled      = "true"
-    "gce_container-declaration" = module.gce_container.metadata_value
+    "gce-container-declaration" = module.gce_container.metadata_value
   })
   tags = [
     local.instance_name

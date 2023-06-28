@@ -14,7 +14,7 @@ variable "region" {
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "tfc_agent_network"
+  default     = "tfc-agent-network"
 }
 
 variable "create_network" {
