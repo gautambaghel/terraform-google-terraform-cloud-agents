@@ -1,4 +1,4 @@
-## Self Hosted Terraform Cloud Agent on Managed Instance Group
+# Self Hosted Terraform Cloud Agent on Managed Instance Group
 
 This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud Agents on a Managed Instance Group (MIG).
 
@@ -15,7 +15,7 @@ This includes:
 
 Below are some examples:
 
-### [Simple Self Hosted Terraform Cloud Agent](../../examples/tfc-agent-mig-vm-simple/README.md)
+## [Simple Self Hosted Terraform Cloud Agent](../../examples/tfc-agent-mig-vm-simple/README.md)
 
 This example shows how to deploy a MIG self hosted Terraform Cloud Agent bootstrapped using startup scripts.
 
@@ -68,7 +68,7 @@ Before this module can be used on a project, you must ensure that the following 
 
 1. Required APIs are activated
 
-    ```
+    ```text
     "iam.googleapis.com",
     "compute.googleapis.com",
     "storage-component.googleapis.com",

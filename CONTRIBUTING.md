@@ -22,7 +22,7 @@ submodules, and example modules are automatically generated based on
 the `variables` and `outputs` of the respective modules. These tables
 must be refreshed if the module interfaces are changed.
 
-### Execution
+### Documentation
 
 Run `make generate_docs` to generate new Inputs and Outputs tables.
 
@@ -41,16 +41,8 @@ Run `pre-commit run --all-files`
 Run `make test_lint`.
 
 [docker-engine]: https://www.docker.com/products/docker-engine
-[flake8]: http://flake8.pycqa.org/en/latest/
-[gofmt]: https://golang.org/cmd/gofmt/
 [google-cloud-sdk]: https://cloud.google.com/sdk/install
-[hadolint]: https://github.com/hadolint/hadolint
-[inspec]: https://inspec.io/
-[kitchen-terraform]: https://github.com/newcontext-oss/kitchen-terraform
-[kitchen]: https://kitchen.ci/
 [make]: https://en.wikipedia.org/wiki/Make_(software)
 [pre-commit]: https://pre-commit.com/
-[shellcheck]: https://www.shellcheck.net/
 [terraform-docs]: https://github.com/segmentio/terraform-docs
-[terraform]: https://terraform.io/
 [tflint]: https://github.com/terraform-linters/tflint

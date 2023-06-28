@@ -15,7 +15,7 @@ This includes
 
 *Below are some examples:*
 
-  - [Terraform Cloud Agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
+- [Terraform Cloud Agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
 
 ## [Terraform Cloud Agents on Managed Instance Groups using VMs](modules/tfc-agent-mig-vm/README.md)
 
@@ -36,7 +36,7 @@ Deployment of Managed Instance Groups requires a [Google VM image](https://cloud
 
 *Below are some examples:*
 
-  - [Terraform Cloud Agents on MIG VMs](examples/tfc-agent-mig-native-simple/README.md) - This example shows how to deploy a MIG Terraform Cloud Agent with startup scripts.
+- [Terraform Cloud Agents on MIG VMs](examples/tfc-agent-mig-native-simple/README.md) - This example shows how to deploy a MIG Terraform Cloud Agent with startup scripts.
 
 ## [Terraform Cloud Agents Instance Groups using Container VMs](modules/tfc-agent-mig-container-vm/README.md)
 
@@ -53,7 +53,7 @@ This includes
 
 *Below are some examples:*
 
-  - [Terraform Cloud Agents on MIG Container VMs](examples/tfc-agent-mig-container-vm-simple/README.md) - This example shows how to deploy a Terraform Cloud Agent on MIG Container VMs.
+- [Terraform Cloud Agents on MIG Container VMs](examples/tfc-agent-mig-container-vm-simple/README.md) - This example shows how to deploy a Terraform Cloud Agent on MIG Container VMs.
 
 ## Requirements
 

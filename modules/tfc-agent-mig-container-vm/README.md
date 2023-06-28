@@ -1,4 +1,4 @@
-## Self Hosted Terraform Cloud Agent on Managed Instance Group Container VMs
+# Self Hosted Terraform Cloud Agent on Managed Instance Group Container VMs
 
 This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud Agents on MIG Container VMs.
 
@@ -13,7 +13,7 @@ This includes:
 
 Below are some examples:
 
-### [Simple Self Hosted Terraform Cloud Agent](../../examples/tfc-agent-mig-container-vm-simple/README.md)
+## [Simple Self Hosted Terraform Cloud Agent](../../examples/tfc-agent-mig-container-vm-simple/README.md)
 
 This example shows how to deploy a self hosted Terraform Cloud Agent on MIG Container VMs.
 
@@ -62,7 +62,7 @@ Before this module can be used on a project, you must ensure that the following 
 
 1. Required APIs are activated
 
-    ```
+    ```text
     "iam.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "containerregistry.googleapis.com",

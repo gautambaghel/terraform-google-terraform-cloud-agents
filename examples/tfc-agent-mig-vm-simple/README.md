@@ -18,9 +18,9 @@ It creates the Terraform Cloud agent pool, registers the agent to that pool and 
 1. Create the infrastructure.
 
     ```sh
-    $ terraform init
-    $ terraform plan
-    $ terraform apply
+    terraform init
+    terraform plan
+    terraform apply
     ```
 
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
