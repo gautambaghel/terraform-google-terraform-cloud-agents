@@ -1,10 +1,21 @@
-# Simple Self Hosted TFC Agent on GKE
+# Simple Self Hosted Terraform Cloud Agent on GKE
 
 ## Overview
 
-This example shows how to deploy TFC Agent on GKE.
+This example shows how to deploy Terraform Cloud Agents on Google Kubernetes Engine (GKE) using the `tfc-agent-gke` module.
 
-It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
+It creates the Terraform Cloud agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
+
+## Prerequisites
+
+The tools needed to build this example are available by default in Google Cloud Shell.
+
+If running from your own system, you will need:
+
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+- [Google Cloud CLI (`gcloud`)](https://cloud.google.com/sdk/docs/install-sdk)
+  - [`gke-gcloud-auth-plugin`](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
+- [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 
 ## Steps to deploy this example
 
@@ -13,38 +24,38 @@ It creates the Terraform Agent pool, registers the agent to that pool and create
     The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
-    project_id = "your-project-id"
-    tfc_agent_token   = "your-tfc-agent-token"
+    project_id      = "your-project-id"
+    tfc_agent_token = "your-tfc-agent-token"
     ```
 
 1. Create the infrastructure.
 
     ```sh
-    $ terraform init
-    $ terraform plan
-    $ terraform apply
+    terraform init
+    terraform plan
+    terraform apply
     ```
 
-1. Build the example TFC Agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
+1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
 
     ```sh
-    $ export PROJECT_ID="your-project-id"
-    $ gcloud config set project $PROJECT_ID
-    $ gcloud services enable cloudbuild.googleapis.com
-    $ gcloud builds submit --config=cloudbuild.yaml
+    export PROJECT_ID="your-project-id"
+    gcloud config set project $PROJECT_ID
+    gcloud services enable cloudbuild.googleapis.com
+    gcloud builds submit --config=cloudbuild.yaml
     ```
 
 1. Replace image in [sample k8s deployment manifest](./sample-manifests/deployment.yaml).
 
     ```sh
-    $ kustomize edit set image gcr.io/PROJECT_ID/tfc-agent:latest=gcr.io/$PROJECT_ID/tfc-agent:latest
+    kustomize edit set image gcr.io/PROJECT_ID/tfc-agent:latest=gcr.io/$PROJECT_ID/tfc-agent:latest
     ```
 
 1. Generate kubeconfig and apply the manifests for Deployment and HorizontalPodAutoscaler.
 
     ```sh
-    $ gcloud container clusters get-credentials $(terraform output -raw cluster_name)
-    $ kustomize build . | kubectl apply -f -
+    gcloud container clusters get-credentials $(terraform output -raw cluster_name)
+    kustomize build . | kubectl apply -f -
     ```
 
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.

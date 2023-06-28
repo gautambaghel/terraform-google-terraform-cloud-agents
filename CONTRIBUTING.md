@@ -33,6 +33,7 @@ maintain a standard of quality.
 
 When working with the repository for the first time run pre-commit
 
+Run `pre-commit install`
 Run `pre-commit run --all-files`
 
 ### Execution
@@ -40,16 +41,8 @@ Run `pre-commit run --all-files`
 Run `make test_lint`.
 
 [docker-engine]: https://www.docker.com/products/docker-engine
-[flake8]: http://flake8.pycqa.org/en/latest/
-[gofmt]: https://golang.org/cmd/gofmt/
 [google-cloud-sdk]: https://cloud.google.com/sdk/install
-[hadolint]: https://github.com/hadolint/hadolint
-[inspec]: https://inspec.io/
-[kitchen-terraform]: https://github.com/newcontext-oss/kitchen-terraform
-[kitchen]: https://kitchen.ci/
 [make]: https://en.wikipedia.org/wiki/Make_(software)
 [pre-commit]: https://pre-commit.com/
-[shellcheck]: https://www.shellcheck.net/
 [terraform-docs]: https://github.com/segmentio/terraform-docs
-[terraform]: https://terraform.io/
 [tflint]: https://github.com/terraform-linters/tflint

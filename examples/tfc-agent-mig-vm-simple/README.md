@@ -1,26 +1,26 @@
-# Example TFC Agent that support Docker Workflows
+# Example Terraform Cloud Agent on Managed Instance Group
 
 ## Overview
 
-This example showcases how to use startup scripts to deploy a Terraform Cloud Agent using the `tfc-agent-mig` module.
+This example showcases how to use startup scripts to deploy a Terraform Cloud Agent using the `tfc-agent-mig-vm` module.
 
-It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached using startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online.
+It creates the Terraform Cloud agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached using startup/shutdown scripts to install the Terraform Cloud Agent binary, register the agent when it comes online.
 
 ## Steps to deploy this example
 
 1. Create terraform.tfvars file with the necessary values. The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
-    project_id = "your-project-id"
-    tfc_agent_token   = "your-tfc-agent-token"
+    project_id      = "your-project-id"
+    tfc_agent_token = "your-tfc-agent-token"
     ```
 
 1. Create the infrastructure.
 
     ```sh
-    $ terraform init
-    $ terraform plan
-    $ terraform apply
+    terraform init
+    terraform plan
+    terraform apply
     ```
 
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
