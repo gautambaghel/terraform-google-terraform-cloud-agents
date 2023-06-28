@@ -44,7 +44,7 @@ variable "ip_range_services_cider" {
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "tfc_agent_network"
+  default     = "tfc-agent-network"
 }
 
 variable "subnet_ip" {
