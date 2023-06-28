@@ -1,6 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 
-FROM hashicorp/tfc-agent
+#hadolint ignore=DL3007
+FROM hashicorp/tfc-agent:latest
 
 USER root
 
@@ -15,6 +16,4 @@ RUN mkdir -p /usr/local/gcloud \
 # Adding the package path to local
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
-# /home/tfc-agent/bin/tfc-agent is the entrypoint from the hashicorp image
-ENTRYPOINT ["/home/tfc-agent/bin/tfc-agent"]
-CMD ["-single"]
+USER tfc-agent
