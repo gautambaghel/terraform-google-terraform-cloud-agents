@@ -9,6 +9,11 @@ The following dependencies must be installed on the development system:
 - [Docker Engine][docker-engine]
 - [Google Cloud SDK][google-cloud-sdk]
 - [make]
+- [pre-commit]
+- [terraform-docs]
+- [tflint]
+
+For more info refer the [tool-versions file](.tool-versions)
 
 ## Generating Documentation for Inputs and Outputs
 
@@ -26,9 +31,13 @@ Run `make generate_docs` to generate new Inputs and Outputs tables.
 Many of the files in the repository can be linted or formatted to
 maintain a standard of quality.
 
+When working with the repository for the first time run pre-commit
+
+Run `pre-commit run --all-files`
+
 ### Execution
 
-Run `make docker_test_lint`.
+Run `make test_lint`.
 
 [docker-engine]: https://www.docker.com/products/docker-engine
 [flake8]: http://flake8.pycqa.org/en/latest/
@@ -39,6 +48,8 @@ Run `make docker_test_lint`.
 [kitchen-terraform]: https://github.com/newcontext-oss/kitchen-terraform
 [kitchen]: https://kitchen.ci/
 [make]: https://en.wikipedia.org/wiki/Make_(software)
+[pre-commit]: https://pre-commit.com/
 [shellcheck]: https://www.shellcheck.net/
 [terraform-docs]: https://github.com/segmentio/terraform-docs
 [terraform]: https://terraform.io/
+[tflint]: https://github.com/terraform-linters/tflint

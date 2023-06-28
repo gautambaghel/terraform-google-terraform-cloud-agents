@@ -8,13 +8,13 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The GCP region to deploy instances into"
-  default     = "us-east4"
+  default     = "us-central1"
 }
 
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "tfc-agent-network"
+  default     = "tfc_agent_network"
 }
 
 variable "create_network" {

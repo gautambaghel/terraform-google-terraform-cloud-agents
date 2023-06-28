@@ -13,7 +13,7 @@ variable "tfc_org_name" {
 variable "tfc_project_name" {
   type        = string
   description = "Terraform Cloud project name to be created"
-  default     = "GCP US West GKE"
+  default     = "GCP Agents GKE"
 }
 
 variable "tfc_workspace_name" {

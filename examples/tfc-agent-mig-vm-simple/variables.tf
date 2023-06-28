@@ -13,23 +13,23 @@ variable "tfc_org_name" {
 variable "tfc_project_name" {
   type        = string
   description = "Terraform Cloud project name to be created"
-  default     = "GCP US West"
+  default     = "GCP Agents VM"
 }
 
 variable "tfc_workspace_name" {
   type        = string
   description = "Terraform Cloud workspace name to be created"
-  default     = "tfc-agent-mig-native-simple"
+  default     = "tfc-agent-mig-vm-simple"
 }
 
 variable "tfc_agent_pool_name" {
   type        = string
   description = "Terraform Cloud Agent pool name to be created"
-  default     = "tfc-agent-mig-native-simple-pool"
+  default     = "tfc-agent-mig-vm-simple-pool"
 }
 
 variable "tfc_agent_pool_token" {
   type        = string
   description = "Terraform Cloud Agent pool token description"
-  default     = "tfc-agent-mig-native-simple-pool-token"
+  default     = "tfc-agent-mig-vm-simple-pool-token"
 }

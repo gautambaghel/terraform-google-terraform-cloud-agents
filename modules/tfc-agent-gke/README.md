@@ -28,9 +28,9 @@ This example shows how to deploy a simple GKE Self Hosted TFC Agent.
 | machine\_type | Machine type for TFC agent node pool | `string` | `"n1-standard-4"` | no |
 | max\_node\_count | Maximum number of nodes in the TFC agent node pool | `number` | `4` | no |
 | min\_node\_count | Minimum number of nodes in the TFC agent node pool | `number` | `2` | no |
-| network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
+| network\_name | Name for the VPC network | `string` | `"tfc_agent_network"` | no |
 | project\_id | The project id to deploy Terraform Cloud Agent cluster | `string` | n/a | yes |
-| region | The GCP region to deploy instances into | `string` | `"us-west1"` | no |
+| region | The GCP region to deploy instances into | `string` | `"us-central1"` | no |
 | service\_account | Optional Service Account for the nodes | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.0.0.0/17"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
@@ -41,7 +41,7 @@ This example shows how to deploy a simple GKE Self Hosted TFC Agent.
 | tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
 | tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
-| zones | The GCP zone to deploy gke into | `list(string)` | <pre>[<br>  "us-west1-a"<br>]</pre> | no |
+| zones | The GCP zone to deploy gke into | `list(string)` | <pre>[<br>  "us-central1-a"<br>]</pre> | no |
 
 ## Outputs
 

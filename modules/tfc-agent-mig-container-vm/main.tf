@@ -1,12 +1,12 @@
 # Copyright (c) HashiCorp, Inc.
 
 locals {
-  dindVolumeMounts = var.dind ? [{
+  dind_volume_mounts = var.dind ? [{
     mountPath = "/var/run/docker.sock"
     name      = "dockersock"
     readOnly  = false
   }] : []
-  dindVolumes = var.dind ? [
+  dind_volumes = var.dind ? [
     {
       name = "dockersock"
 
@@ -14,8 +14,8 @@ locals {
         path = "/var/run/docker.sock"
       }
   }] : []
-  network_name    = var.create_network ? google_compute_network.tfc-agent-network[0].self_link : var.network_name
-  subnet_name     = var.create_network ? google_compute_subnetwork.tfc-agent-subnetwork[0].self_link : var.subnet_name
+  network_name    = var.create_network ? google_compute_network.tfc_agent_network[0].self_link : var.network_name
+  subnet_name     = var.create_network ? google_compute_subnetwork.tfc_agent_subnetwork[0].self_link : var.subnet_name
   service_account = var.service_account == "" ? google_service_account.tfc_agent_service_account[0].email : var.service_account
   instance_name   = "${var.tfc_agent_name_prefix}-${random_string.suffix.result}"
 }
@@ -29,26 +29,26 @@ resource "random_string" "suffix" {
 /*****************************************
   Optional TFC Agent Networking
  *****************************************/
-resource "google_compute_network" "tfc-agent-network" {
+resource "google_compute_network" "tfc_agent_network" {
   count                   = var.create_network ? 1 : 0
   name                    = var.network_name
   project                 = var.project_id
   auto_create_subnetworks = false
 }
 
-resource "google_compute_subnetwork" "tfc-agent-subnetwork" {
+resource "google_compute_subnetwork" "tfc_agent_subnetwork" {
   count         = var.create_network ? 1 : 0
   project       = var.project_id
   name          = var.subnet_name
   ip_cidr_range = var.subnet_ip
   region        = var.region
-  network       = google_compute_network.tfc-agent-network[0].name
+  network       = google_compute_network.tfc_agent_network[0].name
 }
 
 resource "google_compute_router" "default" {
   count   = var.create_network ? 1 : 0
   name    = "${var.network_name}-router"
-  network = google_compute_network.tfc-agent-network[0].self_link
+  network = google_compute_network.tfc_agent_network[0].self_link
   region  = var.region
   project = var.project_id
 }
@@ -88,7 +88,7 @@ resource "google_project_iam_binding" "gce" {
   TFC Agent GCE Instance Template
  *****************************************/
 
-module "gce-container" {
+module "gce_container" {
   source  = "terraform-google-modules/container-vm/google"
   version = "~> 3.0"
   container = {
@@ -124,7 +124,7 @@ module "gce-container" {
         name      = "tempfs-0"
         readOnly  = false
       }
-    ], local.dindVolumeMounts)
+    ], local.dind_volume_mounts)
   }
 
   # Declare the volumes
@@ -136,7 +136,7 @@ module "gce-container" {
         medium = "Memory"
       }
     }
-  ], local.dindVolumes)
+  ], local.dind_volumes)
 
   restart_policy = var.restart_policy
 }
@@ -162,16 +162,16 @@ module "mig_template" {
   source_image_project = "cos-cloud"
   startup_script       = var.startup_script
   name_prefix          = var.tfc_agent_name_prefix
-  source_image         = reverse(split("/", module.gce-container.source_image))[0]
+  source_image         = reverse(split("/", module.gce_container.source_image))[0]
   metadata = merge(var.additional_metadata, {
     google-logging-enabled      = "true"
-    "gce-container-declaration" = module.gce-container.metadata_value
+    "gce_container-declaration" = module.gce_container.metadata_value
   })
   tags = [
     local.instance_name
   ]
   labels = {
-    container-vm = module.gce-container.vm_container_label
+    container-vm = module.gce_container.vm_container_label
   }
 }
 /*****************************************

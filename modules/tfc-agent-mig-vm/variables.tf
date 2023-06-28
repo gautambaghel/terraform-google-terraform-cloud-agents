@@ -8,13 +8,13 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The GCP region to deploy instances into"
-  default     = "us-west1"
+  default     = "us-central1"
 }
 
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "tfc-agent-network"
+  default     = "tfc_agent_network"
 }
 
 variable "create_network" {
@@ -133,7 +133,7 @@ variable "tfc_agent_auto_update" {
 variable "tfc_agent_name_prefix" {
   type        = string
   description = "This name may be used in the Terraform Cloud user interface to help easily identify the agent"
-  default     = "tfc-agent-mig-vm"
+  default     = "tfc_agent_mig-vm"
 }
 
 variable "tfc_agent_token" {

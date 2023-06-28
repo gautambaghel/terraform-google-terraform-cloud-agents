@@ -1,8 +1,8 @@
 # Copyright (c) HashiCorp, Inc.
 
 locals {
-  network_name    = var.create_network ? google_compute_network.tfc-agent-network[0].self_link : var.network_name
-  subnet_name     = var.create_subnetwork ? google_compute_subnetwork.tfc-agent-subnetwork[0].self_link : var.subnet_name
+  network_name    = var.create_network ? google_compute_network.tfc_agent_network[0].self_link : var.network_name
+  subnet_name     = var.create_subnetwork ? google_compute_subnetwork.tfc_agent_subnetwork[0].self_link : var.subnet_name
   service_account = var.service_account == "" ? google_service_account.tfc_agent_service_account[0].email : var.service_account
   startup_script  = var.startup_script == "" ? file("${path.module}/scripts/startup.sh") : var.startup_script
   instance_name   = "${var.tfc_agent_name_prefix}-${random_string.suffix.result}"
@@ -18,14 +18,14 @@ resource "random_string" "suffix" {
   Optional Terraform Agent Networking
  *****************************************/
 
-resource "google_compute_network" "tfc-agent-network" {
+resource "google_compute_network" "tfc_agent_network" {
   count                   = var.create_network ? 1 : 0
   name                    = var.network_name
   project                 = var.project_id
   auto_create_subnetworks = false
 }
 
-resource "google_compute_subnetwork" "tfc-agent-subnetwork" {
+resource "google_compute_subnetwork" "tfc_agent_subnetwork" {
   count         = var.create_subnetwork ? 1 : 0
   project       = var.project_id
   name          = var.subnet_name
@@ -34,20 +34,20 @@ resource "google_compute_subnetwork" "tfc-agent-subnetwork" {
   network       = local.network_name
 }
 
-resource "google_compute_router" "tfc-agent-router" {
+resource "google_compute_router" "tfc_agent_router" {
   count   = var.create_network ? 1 : 0
   name    = "${var.network_name}-router"
-  network = google_compute_network.tfc-agent-network[0].self_link
+  network = google_compute_network.tfc_agent_network[0].self_link
   region  = var.region
   project = var.project_id
 }
 
-resource "google_compute_router_nat" "tfc-agent-nat" {
+resource "google_compute_router_nat" "tfc_agent_nat" {
   count                              = var.create_network ? 1 : 0
   project                            = var.project_id
   name                               = "${var.network_name}-nat"
-  router                             = google_compute_router.tfc-agent-router[0].name
-  region                             = google_compute_router.tfc-agent-router[0].region
+  router                             = google_compute_router.tfc_agent_router[0].name
+  region                             = google_compute_router.tfc_agent_router[0].region
   nat_ip_allocate_option             = "AUTO_ONLY"
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 }
@@ -67,7 +67,7 @@ resource "google_service_account" "tfc_agent_service_account" {
   Terraform Agent Secrets
  *****************************************/
 
-resource "google_secret_manager_secret" "tfc-agent-secret" {
+resource "google_secret_manager_secret" "tfc_agent_secret" {
   provider  = google-beta
   project   = var.project_id
   secret_id = "tfc-agent"
@@ -85,9 +85,9 @@ resource "google_secret_manager_secret" "tfc-agent-secret" {
   }
 }
 
-resource "google_secret_manager_secret_version" "tfc-agent-secret-version" {
+resource "google_secret_manager_secret_version" "tfc_agent_secret_version" {
   provider = google-beta
-  secret   = google_secret_manager_secret.tfc-agent-secret.id
+  secret   = google_secret_manager_secret.tfc_agent_secret.id
   secret_data = jsonencode({
     "TFC_ADDRESS"           = var.tfc_agent_address
     "TFC_AGENT_SINGLE"      = var.tfc_agent_single
@@ -98,10 +98,10 @@ resource "google_secret_manager_secret_version" "tfc-agent-secret-version" {
   })
 }
 
-resource "google_secret_manager_secret_iam_member" "tfc-agent-secret-member" {
+resource "google_secret_manager_secret_iam_member" "tfc_agent_secret_member" {
   provider  = google-beta
   project   = var.project_id
-  secret_id = google_secret_manager_secret.tfc-agent-secret.id
+  secret_id = google_secret_manager_secret.tfc_agent_secret.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${local.service_account}"
 }
@@ -134,7 +134,7 @@ module "mig_template" {
   name_prefix          = var.tfc_agent_name_prefix
   startup_script       = local.startup_script
   metadata = merge({
-    "secret-id" = google_secret_manager_secret_version.tfc-agent-secret-version.name
+    "secret-id" = google_secret_manager_secret_version.tfc_agent_secret_version.name
   }, var.custom_metadata)
   tags = [
     local.instance_name

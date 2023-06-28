@@ -3,7 +3,7 @@
 output "kubernetes_endpoint" {
   description = "The cluster endpoint"
   sensitive   = true
-  value       = module.tfc-agent-cluster.endpoint
+  value       = module.tfc_agent_cluster.endpoint
 }
 
 output "client_token" {
@@ -15,17 +15,17 @@ output "client_token" {
 output "ca_certificate" {
   description = "The cluster ca certificate (base64 encoded)"
   sensitive   = true
-  value       = module.tfc-agent-cluster.ca_certificate
+  value       = module.tfc_agent_cluster.ca_certificate
 }
 
 output "service_account" {
   description = "The default service account used for TFC agent nodes."
-  value       = module.tfc-agent-cluster.service_account
+  value       = module.tfc_agent_cluster.service_account
 }
 
 output "cluster_name" {
   description = "Cluster name"
-  value       = module.tfc-agent-cluster.name
+  value       = module.tfc_agent_cluster.name
 }
 
 output "network_name" {
@@ -40,5 +40,5 @@ output "subnet_name" {
 
 output "location" {
   description = "Cluster location"
-  value       = module.tfc-agent-cluster.location
+  value       = module.tfc_agent_cluster.location
 }

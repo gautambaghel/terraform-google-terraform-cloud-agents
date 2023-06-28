@@ -27,9 +27,9 @@ This example shows how to deploy a Self Hosted TFC Agent on MIG Container VMs.
 | create\_network | When set to true, VPC,router and NAT will be auto created | `bool` | `true` | no |
 | dind | Flag to determine whether to expose dockersock | `bool` | `false` | no |
 | image | The Terraform Agent image | `string` | `"hashicorp/tfc-agent:latest"` | no |
-| network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
+| network\_name | Name for the VPC network | `string` | `"tfc_agent_network"` | no |
 | project\_id | The project id to deploy Terraform Agent | `string` | n/a | yes |
-| region | The GCP region to deploy instances into | `string` | `"us-east4"` | no |
+| region | The GCP region to deploy instances into | `string` | `"us-central1"` | no |
 | restart\_policy | The desired Docker restart policy for the agent image | `string` | `"Always"` | no |
 | service\_account | Service account email address | `string` | `""` | no |
 | startup\_script | User startup script to run when instances spin up | `string` | `""` | no |

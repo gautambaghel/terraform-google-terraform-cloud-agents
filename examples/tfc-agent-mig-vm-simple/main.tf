@@ -27,7 +27,7 @@ resource "tfe_agent_token" "tfc_agent_token" {
   description   = var.tfc_agent_pool_token
 }
 
-module "tfc-agent-mig" {
+module "tfc_agent_mig" {
   source          = "../../modules/tfc-agent-mig-vm"
   create_network  = true
   project_id      = var.project_id

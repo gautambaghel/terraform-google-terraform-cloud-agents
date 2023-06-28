@@ -8,13 +8,13 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The GCP region to deploy instances into"
-  default     = "us-west1"
+  default     = "us-central1"
 }
 
 variable "zones" {
   type        = list(string)
   description = "The GCP zone to deploy gke into"
-  default     = ["us-west1-a"]
+  default     = ["us-central1-a"]
 }
 
 variable "ip_range_pods_name" {
@@ -44,7 +44,7 @@ variable "ip_range_services_cider" {
 variable "network_name" {
   type        = string
   description = "Name for the VPC network"
-  default     = "tfc-agent-network"
+  default     = "tfc_agent_network"
 }
 
 variable "subnet_ip" {

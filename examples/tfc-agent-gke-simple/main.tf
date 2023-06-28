@@ -30,7 +30,7 @@ resource "tfe_agent_token" "tfc_agent_token" {
   description   = var.tfc_agent_pool_token
 }
 
-module "tfc-agent-gke" {
+module "tfc_agent_gke" {
   source          = "../../modules/tfc-agent-gke"
   create_network  = true
   project_id      = var.project_id
