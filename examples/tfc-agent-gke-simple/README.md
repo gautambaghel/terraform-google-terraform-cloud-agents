@@ -1,10 +1,10 @@
-# Simple Self Hosted TFC Agent on GKE
+# Simple Self Hosted Terraform Cloud Agent on GKE
 
 ## Overview
 
-This example shows how to deploy TFC Agent on GKE.
+This example shows how to deploy Terraform Cloud Agents on Google Kubernetes Engine (GKE) using the `tfc-agent-gke` module.
 
-It creates the Terraform Agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
+It creates the Terraform Cloud agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
 
 ## Steps to deploy this example
 
@@ -13,8 +13,8 @@ It creates the Terraform Agent pool, registers the agent to that pool and create
     The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
-    project_id = "your-project-id"
-    tfc_agent_token   = "your-tfc-agent-token"
+    project_id      = "your-project-id"
+    tfc_agent_token = "your-tfc-agent-token"
     ```
 
 1. Create the infrastructure.
@@ -25,7 +25,7 @@ It creates the Terraform Agent pool, registers the agent to that pool and create
     $ terraform apply
     ```
 
-1. Build the example TFC Agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
+1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
 
     ```sh
     $ export PROJECT_ID="your-project-id"
