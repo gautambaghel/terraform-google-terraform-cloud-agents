@@ -89,11 +89,12 @@ resource "google_secret_manager_secret_version" "tfc_agent_secret_version" {
   provider = google-beta
   secret   = google_secret_manager_secret.tfc_agent_secret.id
   secret_data = jsonencode({
+    "TFC_AGENT_NAME"        = local.instance_name
     "TFC_ADDRESS"           = var.tfc_agent_address
+    "TFC_AGENT_TOKEN"       = var.tfc_agent_token
     "TFC_AGENT_SINGLE"      = var.tfc_agent_single
     "TFC_AGENT_AUTO_UPDATE" = var.tfc_agent_auto_update
-    "TFC_AGENT_TOKEN"       = var.tfc_agent_token
-    "TFC_AGENT_NAME"        = local.instance_name
+    "AGENT_VERSION"         = var.tfc_agent_version
     "LABELS"                = join(",", var.tfc_agent_labels)
   })
 }
