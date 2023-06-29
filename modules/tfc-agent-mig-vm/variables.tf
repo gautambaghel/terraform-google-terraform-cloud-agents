@@ -146,3 +146,9 @@ variable "tfc_agent_labels" {
   description = "Terraform Cloud Agent labels to attach to the VMs"
   default     = []
 }
+
+variable "tfc_agent_version" {
+  type        = string
+  description = "Terraform Cloud Agent version to install"
+  default     = "1.10.0"
+}
