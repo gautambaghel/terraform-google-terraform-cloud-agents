@@ -78,11 +78,18 @@ module "tfc_agent_cluster" {
   IAM Bindings GKE SVC
  *****************************************/
 
-# Allow GKE to pull images from GCR
-resource "google_project_iam_member" "gke" {
+# Allow GKE to pull images from GAR
+resource "google_project_iam_member" "gar_viewer" {
   count   = var.service_account == "" ? 1 : 0
   project = var.project_id
   role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${module.tfc_agent_cluster.service_account}"
+}
+
+resource "google_project_iam_member" "gar_reader" {
+  count   = var.service_account == "" ? 1 : 0
+  project = var.project_id
+  role    = "roles/artifactregistry.reader"
   member  = "serviceAccount:${module.tfc_agent_cluster.service_account}"
 }
 

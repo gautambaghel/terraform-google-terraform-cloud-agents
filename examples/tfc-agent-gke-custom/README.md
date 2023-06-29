@@ -36,6 +36,28 @@ If running from your own system, you will need:
     terraform apply
     ```
 
+1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
+
+    ```sh
+    export PROJECT_ID="your-project-id"
+    gcloud config set project $PROJECT_ID
+    gcloud services enable cloudbuild.googleapis.com
+    gcloud builds submit --config=cloudbuild.yaml
+    ```
+
+1. Replace image in [sample k8s deployment manifest](./sample-manifests/deployment.yaml).
+
+    ```sh
+    kustomize edit set image gcr.io/PROJECT_ID/tfc-agent:latest=gcr.io/$PROJECT_ID/tfc-agent:latest
+    ```
+
+1. Generate kubeconfig and apply the manifests for Deployment and HorizontalPodAutoscaler.
+
+    ```sh
+    gcloud container clusters get-credentials $(terraform output -raw cluster_name)
+    kustomize build . | kubectl apply -f -
+    ```
+
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
 
 1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
