@@ -35,10 +35,24 @@ resource "tfe_agent_token" "tfc_agent_token" {
   description   = var.tfc_agent_pool_token
 }
 
+# Allow GKE to pull images from Google Artifact Registry
+resource "google_project_iam_member" "gar_viewer" {
+  project = var.project_id
+  role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${module.tfc_agent_gke.service_account}"
+}
+
+resource "google_project_iam_member" "gar_reader" {
+  project = var.project_id
+  role    = "roles/artifactregistry.reader"
+  member  = "serviceAccount:${module.tfc_agent_gke.service_account}"
+}
+
 # Create the infrastructure for the Agent to run
 module "tfc_agent_gke" {
   source          = "../../modules/tfc-agent-gke"
   create_network  = true
   project_id      = var.project_id
+  tfc_agent_image = var.tfc_agent_image
   tfc_agent_token = tfe_agent_token.tfc_agent_token.token
 }

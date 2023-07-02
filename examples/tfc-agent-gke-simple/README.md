@@ -15,7 +15,6 @@ If running from your own system, you will need:
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 - [Google Cloud CLI (`gcloud`)](https://cloud.google.com/sdk/docs/install-sdk)
   - [`gke-gcloud-auth-plugin`](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
-- [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 
 ## Steps to deploy this example
 
@@ -38,7 +37,7 @@ If running from your own system, you will need:
 
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
 
-1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
+1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent. [Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -46,11 +45,11 @@ If running from your own system, you will need:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | project\_id | The project id to deploy Terraform Cloud Agent | `string` | n/a | yes |
-| tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-simple-pool"` | no |
-| tfc\_agent\_pool\_token | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-simple-pool-token"` | no |
 | tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
 | tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP Agents GKE"` | no |
 | tfc\_workspace\_name | Terraform Cloud workspace name to be created | `string` | `"tfc-agent-gke-simple"` | no |
+| tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-simple-pool"` | no |
+| tfc\_agent\_pool\_token\_description | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-simple-pool-token"` | no |
 
 ## Outputs
 

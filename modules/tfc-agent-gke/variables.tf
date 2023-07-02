@@ -65,9 +65,9 @@ variable "create_network" {
   default     = true
 }
 
-variable "subnetwork_project" {
+variable "network_project_id" {
   type        = string
-  description = "The ID of the project in which the subnetwork belongs. If it is not provided, the project_id is used."
+  description = "The project ID of the shared VPC’s host (for shared vpc support). If not provided, the project_id is used."
   default     = ""
 }
 
@@ -132,5 +132,11 @@ variable "tfc_agent_name_prefix" {
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents)"
+  description = "Terraform Cloud Agent token. (mark as sensitive) (TFC Organization Settings >> Agents)"
+}
+
+variable "tfc_agent_image" {
+  type        = string
+  description = "The Terraform Cloud Agent image to use"
+  default     = "hashicorp/tfc-agent:latest"
 }
