@@ -145,7 +145,7 @@ variable "tfc_agent_image" {
 variable "tfc_agent_memory_request" {
   type        = string
   description = "Memory request for the Terraform Cloud Agent container"
-  default     = "2"
+  default     = "2Gi"
 }
 
 variable "tfc_agent_cpu_request" {

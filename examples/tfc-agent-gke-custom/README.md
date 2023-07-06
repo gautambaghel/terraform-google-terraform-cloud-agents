@@ -41,6 +41,7 @@ If running from your own system, you will need:
     gcloud config set project $PROJECT_ID
     gcloud services enable cloudbuild.googleapis.com
     gcloud services enable artifactregistry.googleapis.com
+    gcloud components update
 
     # Create the Google Artifact Repository for storing the Agent
     gcloud artifacts repositories create $REPOSITORY --location="$LOCATION" --repository-format="DOCKER" 

@@ -13,8 +13,6 @@ The tools needed to build this example are available by default in Google Cloud 
 If running from your own system, you will need:
 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- [Google Cloud CLI (`gcloud`)](https://cloud.google.com/sdk/docs/install-sdk)
-  - [`gke-gcloud-auth-plugin`](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
 
 ## Steps to deploy this example
 
