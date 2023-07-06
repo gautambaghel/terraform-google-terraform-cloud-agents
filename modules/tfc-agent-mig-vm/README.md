@@ -31,7 +31,7 @@ This example shows how to deploy a MIG self hosted Terraform Cloud Agent bootstr
 | machine\_type | The GCP machine type to deploy | `string` | `"n1-standard-1"` | no |
 | max\_replicas | Maximum number of Terraform Agent instances | `number` | `10` | no |
 | min\_replicas | Minimum number of Terraform Agent instances | `number` | `1` | no |
-| network\_name | Name for the VPC network | `string` | `"tfc_agent_network"` | no |
+| network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
 | project\_id | The project id to deploy Terraform Cloud Agent | `string` | n/a | yes |
 | region | The GCP region to deploy instances into | `string` | `"us-central1"` | no |
 | service\_account | Service account email address | `string` | `""` | no |
@@ -45,7 +45,7 @@ This example shows how to deploy a MIG self hosted Terraform Cloud Agent bootstr
 | tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
 | tfc\_agent\_labels | Terraform Cloud Agent labels to attach to the VMs | `set(string)` | `[]` | no |
-| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc_agent_mig-vm"` | no |
+| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-mig-vm"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
 | tfc\_agent\_token | Terraform Cloud agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
 

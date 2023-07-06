@@ -140,3 +140,15 @@ variable "tfc_agent_image" {
   description = "The Terraform Cloud Agent image to use"
   default     = "hashicorp/tfc-agent:latest"
 }
+
+variable "tfc_agent_memory_request" {
+  type        = string
+  description = "Memory request for the Terraform Cloud Agent container"
+  default     = "256Mi"
+}
+
+variable "tfc_agent_cpu_request" {
+  type        = string
+  description = "CPU request for the Terraform Cloud Agent container"
+  default     = "500m"
+}

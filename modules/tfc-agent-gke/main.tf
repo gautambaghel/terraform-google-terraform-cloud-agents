@@ -174,13 +174,8 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
           # https://developer.hashicorp.com/terraform/cloud-docs/agents/requirements
           resources {
             requests = {
-              memory = "256Mi"
-              cpu    = "500m"
-            }
-
-            limits = {
-              memory = "512Mi"
-              cpu    = "1"
+              memory = var.tfc_agent_memory_request
+              cpu    = var.tfc_agent_cpu_request
             }
           }
         }

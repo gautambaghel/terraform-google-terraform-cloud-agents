@@ -15,7 +15,8 @@ This includes
 
 *Below are some examples:*
 
-- [Terraform Cloud Agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
+- [Simple Terraform Cloud Agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
+- [Custom Terraform Cloud Agents on GKE](examples/tfc-agent-gke-custom/README.md) - This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 
 ## [Terraform Cloud Agents on Managed Instance Groups using VMs](modules/tfc-agent-mig-vm/README.md)
 
