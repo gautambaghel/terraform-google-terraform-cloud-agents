@@ -32,7 +32,7 @@ resource "tfe_agent_pool" "tfc_agent_pool" {
 # Create a new token for the Agent pool
 resource "tfe_agent_token" "tfc_agent_token" {
   agent_pool_id = tfe_agent_pool.tfc_agent_pool.id
-  description   = var.tfc_agent_pool_token_description
+  description   = var.tfc_agent_pool_token_description_description
 }
 
 # Create the infrastructure for the Agent to run

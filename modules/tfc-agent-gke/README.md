@@ -41,13 +41,13 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
 | tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
-| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud Agent container | `string` | `"500m"` | no |
+| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud Agent container | `string` | `"2"` | no |
 | tfc\_agent\_image | The Terraform Cloud Agent image to use | `string` | `"hashicorp/tfc-agent:latest"` | no |
 | tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC agent on GKE | `string` | `"tfc-agent-k8s-secrets"` | no |
-| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud Agent container | `string` | `"256Mi"` | no |
+| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud Agent container | `string` | `"2"` | no |
 | tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
-| tfc\_agent\_token | Terraform Cloud Agent token. (mark as sensitive) (TFC Organization Settings >> Agents) | `string` | n/a | yes |
+| tfc\_agent\_token | Terraform Cloud Agent token. (TFC Organization Settings >> Agents) | `string` | n/a | yes |
 | zones | The GCP zone to deploy gke into | `list(string)` | <pre>[<br>  "us-central1-a"<br>]</pre> | no |
 
 ## Outputs

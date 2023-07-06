@@ -132,7 +132,8 @@ variable "tfc_agent_name_prefix" {
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud Agent token. (mark as sensitive) (TFC Organization Settings >> Agents)"
+  description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
+  sensitive   = true
 }
 
 variable "tfc_agent_image" {
