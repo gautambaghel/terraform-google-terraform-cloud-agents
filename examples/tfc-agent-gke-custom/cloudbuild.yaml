@@ -6,10 +6,8 @@ steps:
       [
         "build",
         "-t",
-        "gcr.io/$PROJECT_ID/tfc-agent:latest",
-        "-t",
-        "gcr.io/$PROJECT_ID/tfc-agent:0.1",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:${_VERSION}",
         ".",
       ]
 images:
-  - "gcr.io/$PROJECT_ID/tfc-agent"
+  - "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}"

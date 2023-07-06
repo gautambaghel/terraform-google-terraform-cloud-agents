@@ -28,7 +28,7 @@ variable "tfc_agent_pool_name" {
   default     = "tfc-agent-mig-container-vm-simple-pool"
 }
 
-variable "tfc_agent_pool_token" {
+variable "tfc_agent_pool_token_description" {
   type        = string
   description = "Terraform Cloud Agent pool token description"
   default     = "tfc-agent-mig-container-vm-simple-pool-token"

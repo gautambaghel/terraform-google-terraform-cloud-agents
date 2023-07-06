@@ -13,9 +13,6 @@ The tools needed to build this example are available by default in Google Cloud 
 If running from your own system, you will need:
 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- [Google Cloud CLI (`gcloud`)](https://cloud.google.com/sdk/docs/install-sdk)
-  - [`gke-gcloud-auth-plugin`](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
-- [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 
 ## Steps to deploy this example
 
@@ -36,31 +33,9 @@ If running from your own system, you will need:
     terraform apply
     ```
 
-1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use a prebuilt image or build using a local docker daemon.
-
-    ```sh
-    export PROJECT_ID="your-project-id"
-    gcloud config set project $PROJECT_ID
-    gcloud services enable cloudbuild.googleapis.com
-    gcloud builds submit --config=cloudbuild.yaml
-    ```
-
-1. Replace image in [sample k8s deployment manifest](./sample-manifests/deployment.yaml).
-
-    ```sh
-    kustomize edit set image gcr.io/PROJECT_ID/tfc-agent:latest=gcr.io/$PROJECT_ID/tfc-agent:latest
-    ```
-
-1. Generate kubeconfig and apply the manifests for Deployment and HorizontalPodAutoscaler.
-
-    ```sh
-    gcloud container clusters get-credentials $(terraform output -raw cluster_name)
-    kustomize build . | kubectl apply -f -
-    ```
-
 1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
 
-1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
+1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent. [Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -69,7 +44,7 @@ If running from your own system, you will need:
 |------|-------------|------|---------|:--------:|
 | project\_id | The project id to deploy Terraform Cloud Agent | `string` | n/a | yes |
 | tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-simple-pool"` | no |
-| tfc\_agent\_pool\_token | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-simple-pool-token"` | no |
+| tfc\_agent\_pool\_token\_description\_description | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-simple-pool-token"` | no |
 | tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
 | tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP Agents GKE"` | no |
 | tfc\_workspace\_name | Terraform Cloud workspace name to be created | `string` | `"tfc-agent-gke-simple"` | no |
