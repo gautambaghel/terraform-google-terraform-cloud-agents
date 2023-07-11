@@ -19,5 +19,5 @@ variable "tfc_project_name" {
 variable "tfc_workspace_name" {
   type        = string
   description = "Terraform Cloud workspace name where the WIF pool will be attached"
-  default     = "ex-gcp-oidc"
+  default     = "gcp-oidc"
 }

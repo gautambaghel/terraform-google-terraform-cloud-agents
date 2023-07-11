@@ -6,9 +6,9 @@ terraform {
       source  = "hashicorp/google"
       version = "~> 4.0"
     }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 4.0"
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.4.3"
     }
     tfe = {
       source  = "hashicorp/tfe"

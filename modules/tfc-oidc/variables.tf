@@ -104,13 +104,13 @@ variable "tfc_organization_name" {
 variable "tfc_project_name" {
   type        = string
   default     = "Default Project"
-  description = "The project under which a workspace will be created"
+  description = "The Terraform Cloud project to authorize via OIDC"
 }
 
 variable "tfc_workspace_name" {
   type        = string
   default     = "gcp-oidc-workspace"
-  description = "The name of the workspace that you'd like to create and connect to GCP"
+  description = "The name of the Terraform Cloud workspace to authorize via OIDC"
 }
 
 variable "sa_mapping" {

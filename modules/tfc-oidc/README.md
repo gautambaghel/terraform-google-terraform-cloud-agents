@@ -57,8 +57,8 @@ Once provisioned, you can use the `example-tfc-workspace-name` workspace from th
 | sa\_mapping | Service Account resource names and corresponding WIF provider attributes. <br>If attribute is set to `*` all identities in the pool are granted access to SAs. | <pre>map(object({<br>    sa_name   = string<br>    sa_email  = string<br>    attribute = string<br>  }))</pre> | `{}` | no |
 | service\_list | Google Cloud APIs required for the project | `list(string)` | <pre>[<br>  "iam.googleapis.com",<br>  "cloudresourcemanager.googleapis.com",<br>  "sts.googleapis.com",<br>  "iamcredentials.googleapis.com"<br>]</pre> | no |
 | tfc\_organization\_name | The name of your Terraform Cloud organization | `string` | n/a | yes |
-| tfc\_project\_name | The project under which a workspace will be created | `string` | `"Default Project"` | no |
-| tfc\_workspace\_name | The name of the workspace that you'd like to create and connect to GCP | `string` | `"gcp-oidc-workspace"` | no |
+| tfc\_project\_name | The Terraform Cloud project to authorize via OIDC | `string` | `"Default Project"` | no |
+| tfc\_workspace\_name | The name of the Terraform Cloud workspace to authorize via OIDC | `string` | `"gcp-oidc-workspace"` | no |
 
 ## Outputs
 

@@ -12,7 +12,7 @@ This example showcases how to configure [Workload Identity Federation](https://c
 | project\_id | The project id to create WIF pool and example SA | `string` | n/a | yes |
 | tfc\_org\_name | Terraform Cloud org name where the WIF pool will be attached | `string` | n/a | yes |
 | tfc\_project\_name | Terraform Cloud project name where the WIF pool will be attached | `string` | `"GCP OIDC"` | no |
-| tfc\_workspace\_name | Terraform Cloud workspace name where the WIF pool will be attached | `string` | `"ex-gcp-oidc"` | no |
+| tfc\_workspace\_name | Terraform Cloud workspace name where the WIF pool will be attached | `string` | `"gcp-oidc"` | no |
 
 ## Outputs
 

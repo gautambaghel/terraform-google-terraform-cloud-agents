@@ -7,14 +7,15 @@ locals {
 # Enables the required services in the project.
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_service
 resource "google_project_service" "services" {
-  count   = length(var.service_list)
-  service = var.service_list[count.index]
+  project            = var.project_id
+  count              = length(var.service_list)
+  service            = var.service_list[count.index]
+  disable_on_destroy = false
 }
 
 # Creates a workload identity pool to house a workload identity pool provider.
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool
 resource "google_iam_workload_identity_pool" "tfc_pool" {
-  provider                  = google-beta
   project                   = var.project_id
   workload_identity_pool_id = var.pool_id
   display_name              = var.pool_display_name
@@ -27,7 +28,6 @@ resource "google_iam_workload_identity_pool" "tfc_pool" {
 # able to authenticate to GCP using this provider.
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool_provider
 resource "google_iam_workload_identity_pool_provider" "tfc_provider" {
-  provider                           = google-beta
   project                            = var.project_id
   workload_identity_pool_id          = google_iam_workload_identity_pool.tfc_pool.workload_identity_pool_id
   workload_identity_pool_provider_id = var.provider_id
