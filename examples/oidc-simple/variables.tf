@@ -21,3 +21,11 @@ variable "tfc_workspace_name" {
   description = "Terraform Cloud workspace name where the WIF pool will be attached"
   default     = "gcp-oidc"
 }
+
+variable "role_list" {
+  description = "Google Cloud roles required for the Service Account"
+  type        = list(string)
+  default = [
+    "roles/storage.admin"
+  ]
+}

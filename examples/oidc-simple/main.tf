@@ -33,11 +33,12 @@ resource "google_service_account" "sa" {
 }
 
 # Give the service account necessary permissions, 
-# for ex. storage access
+# for ex. storage access - see role_list variable
 resource "google_project_iam_member" "project" {
-  project = var.project_id
-  role    = "roles/storage.admin"
-  member  = "serviceAccount:${google_service_account.sa.email}"
+  project  = var.project_id
+  for_each = toset(var.role_list)
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.sa.email}"
 }
 
 # The following variables must be set to allow runs

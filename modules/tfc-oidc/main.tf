@@ -49,12 +49,3 @@ resource "google_service_account_iam_member" "tfc_service_account_member" {
   role               = "roles/iam.workloadIdentityUser"
   member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.tfc_pool.name}/${each.value.attribute}"
 }
-
-# Updates the IAM policy to grant the service account permissions within the project.
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam
-resource "google_project_iam_member" "tfc_project_member" {
-  for_each = var.sa_mapping
-  project  = var.project_id
-  role     = "roles/editor"
-  member   = "serviceAccount:${each.value.sa_email}"
-}
