@@ -56,6 +56,21 @@ This includes
 
 - [Terraform Cloud Agents on MIG Container VMs](examples/tfc-agent-mig-container-vm-simple/README.md) - This example shows how to deploy a Terraform Cloud Agent on MIG Container VMs.
 
+## [Configure trust between Terraform and Google Cloud](modules/tfc-oidc/README.md)
+
+The `tfc-oidc` module provisions Workload Identity Pools (WIPs) for authenticating Terraform Cloud to Google Cloud Platform using OpenID Connect protocol (OIDC), an open source standard for verifying identity across different systems.
+
+This includes
+
+- Enabling necessary APIs
+- Workload Identity Pool
+- Workload Identity Pool Provider
+- Service Account Configuration
+
+*Below are some examples:*
+
+- [Terraform Cloud OIDC](examples/oidc-simple/README.md) - This example shows how to configure Workload Identity Federation for a sample Service Account.
+
 ## Requirements
 
 These sections describe requirements for using this module.
