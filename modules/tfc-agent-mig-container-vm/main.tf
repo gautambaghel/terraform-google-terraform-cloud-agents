@@ -29,6 +29,7 @@ resource "random_string" "suffix" {
 /*****************************************
   Optional TFC Agent Networking
  *****************************************/
+
 resource "google_compute_network" "tfc_agent_network" {
   count                   = var.create_network ? 1 : 0
   name                    = var.network_name
@@ -174,9 +175,11 @@ module "mig_template" {
     container-vm = module.gce_container.vm_container_label
   }
 }
+
 /*****************************************
   TFC Agent MIG
  *****************************************/
+
 module "mig" {
   source             = "terraform-google-modules/vm/google//modules/mig"
   version            = "~> 7.0"

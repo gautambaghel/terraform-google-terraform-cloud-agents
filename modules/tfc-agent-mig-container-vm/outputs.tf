@@ -26,6 +26,6 @@ output "subnet_name" {
 }
 
 output "service_account" {
-  description = "Service account email for GCE"
+  description = "Service account email attached to MIG templates for GCE"
   value       = local.service_account
 }

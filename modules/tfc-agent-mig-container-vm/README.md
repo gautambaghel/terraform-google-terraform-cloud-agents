@@ -23,21 +23,21 @@ This example shows how to deploy a self hosted Terraform Cloud Agent on MIG Cont
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | additional\_metadata | Additional metadata to attach to the instance | `map(any)` | `{}` | no |
-| cooldown\_period | The number of seconds that the autoscaler should wait before it starts collecting information from a new instance. | `number` | `60` | no |
-| create\_network | When set to true, VPC,router and NAT will be auto created | `bool` | `true` | no |
+| cooldown\_period | The number of seconds that the autoscaler should wait before it<br>starts collecting information from a new instance. | `number` | `60` | no |
+| create\_network | When set to true, VPC, router and NAT will be auto created | `bool` | `true` | no |
 | dind | Flag to determine whether to expose dockersock | `bool` | `false` | no |
-| image | The Terraform Agent image | `string` | `"hashicorp/tfc-agent:latest"` | no |
+| image | The Terraform Cloud Agent image | `string` | `"hashicorp/tfc-agent:latest"` | no |
 | network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
-| project\_id | The project id to deploy Terraform Agent | `string` | n/a | yes |
-| region | The GCP region to deploy instances into | `string` | `"us-central1"` | no |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud Agent | `string` | n/a | yes |
+| region | The GCP region to use when deploying resources | `string` | `"us-central1"` | no |
 | restart\_policy | The desired Docker restart policy for the agent image | `string` | `"Always"` | no |
-| service\_account | Service account email address | `string` | `""` | no |
+| service\_account | Service account email address to assign roles and attach to MIG templates | `string` | `""` | no |
 | startup\_script | User startup script to run when instances spin up | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.10.10.0/24"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
-| subnetwork\_project | The ID of the project in which the subnetwork belongs. If it is not provided, the project\_id is used. | `string` | `""` | no |
+| subnetwork\_project | The project ID of the shared VPCs host (for shared vpc support). <br>If not provided, the project\_id is used | `string` | `""` | no |
 | target\_size | The number of Terraform Cloud Agent instances | `number` | `2` | no |
-| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
+| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
 | tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-container-vm"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
