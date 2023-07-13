@@ -54,7 +54,8 @@ Once provisioned, you can use the `example-tfc-workspace-name` workspace from th
 | provider\_description | Workload Identity Pool Provider description | `string` | `"Workload Identity Pool Provider managed by Terraform"` | no |
 | provider\_display\_name | Workload Identity Pool Provider display name | `string` | `null` | no |
 | provider\_id | Workload Identity Pool Provider id | `string` | n/a | yes |
-| sa\_mapping | Service Account resource names and corresponding WIF provider attributes. <br>If attribute is set to `*` all identities in the pool are granted access to SAs. | <pre>map(object({<br>    sa_name   = string<br>    sa_email  = string<br>    attribute = string<br>  }))</pre> | `{}` | no |
+| role\_list | Roles to attach to the Service Account to provision resources | `list(string)` | `[]` | no |
+| service\_account | Service Account email address, if left empty a new one is created | `string` | `""` | no |
 | service\_list | Google Cloud APIs required for the project | `list(string)` | <pre>[<br>  "iam.googleapis.com",<br>  "cloudresourcemanager.googleapis.com",<br>  "sts.googleapis.com",<br>  "iamcredentials.googleapis.com"<br>]</pre> | no |
 | tfc\_organization\_name | The name of your Terraform Cloud organization | `string` | n/a | yes |
 | tfc\_project\_name | The Terraform Cloud project to authorize via OIDC | `string` | `"Default Project"` | no |
@@ -66,6 +67,7 @@ Once provisioned, you can use the `example-tfc-workspace-name` workspace from th
 |------|-------------|
 | pool\_name | Pool name |
 | provider\_name | Provider name |
+| service\_account | Email of the Service Account |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

@@ -96,6 +96,18 @@ variable "issuer_uri" {
   default     = "https://app.terraform.io"
 }
 
+variable "service_account" {
+  description = "Service Account email address, if left empty a new one is created"
+  type        = string
+  default     = ""
+}
+
+variable "role_list" {
+  type        = list(string)
+  description = "Roles to attach to the Service Account to provision resources"
+  default     = []
+}
+
 variable "tfc_organization_name" {
   type        = string
   description = "The name of your Terraform Cloud organization"
@@ -111,17 +123,4 @@ variable "tfc_workspace_name" {
   type        = string
   default     = "gcp-oidc-workspace"
   description = "The name of the Terraform Cloud workspace to authorize via OIDC"
-}
-
-variable "sa_mapping" {
-  type = map(object({
-    sa_name   = string
-    sa_email  = string
-    attribute = string
-  }))
-  description = <<-EOF
-    Service Account resource names and corresponding WIF provider attributes. 
-    If attribute is set to `*` all identities in the pool are granted access to SAs.
-  EOF
-  default     = {}
 }

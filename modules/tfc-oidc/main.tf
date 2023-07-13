@@ -2,6 +2,7 @@
 
 locals {
   attribute_condition = var.attribute_condition == "" ? "assertion.sub.startsWith(\"organization:${var.tfc_organization_name}:project:${var.tfc_project_name}:workspace:${var.tfc_workspace_name}\")" : var.attribute_condition
+  service_account     = var.service_account == "" ? google_service_account.tfc_oidc_service_account[0].email : var.service_account
 }
 
 # Enables the required services in the project.
@@ -41,11 +42,27 @@ resource "google_iam_workload_identity_pool_provider" "tfc_provider" {
   }
 }
 
+resource "google_service_account" "tfc_oidc_service_account" {
+  count        = var.service_account == "" ? 1 : 0
+  project      = var.project_id
+  account_id   = "tfc-oidc-service-account"
+  display_name = "Terraform Cloud Service Account"
+}
+
 # Allows the service account to act as a workload identity user.
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_iam
 resource "google_service_account_iam_member" "tfc_service_account_member" {
-  for_each           = var.sa_mapping
-  service_account_id = each.value.sa_name
+  service_account_id = "projects/${var.project_id}/serviceAccounts/${local.service_account}"
   role               = "roles/iam.workloadIdentityUser"
-  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.tfc_pool.name}/${each.value.attribute}"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.tfc_pool.name}/*"
+}
+
+# Updates the IAM policy to grant the service account permissions
+# within the project.
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam
+resource "google_project_iam_member" "tfc_project_member" {
+  project  = var.project_id
+  for_each = toset(var.role_list)
+  role     = each.value
+  member   = "serviceAccount:${local.service_account}"
 }

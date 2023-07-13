@@ -26,21 +26,6 @@ resource "tfe_workspace" "tfc_workspace" {
   project_id   = tfe_project.tfc_project.id
 }
 
-# Create a new Service Account in Google Cloud
-resource "google_service_account" "sa" {
-  project    = var.project_id
-  account_id = "terraform-storage-sa"
-}
-
-# Give the service account necessary permissions, 
-# for ex. storage access - see role_list variable
-resource "google_project_iam_member" "project" {
-  project  = var.project_id
-  for_each = toset(var.role_list)
-  role     = each.value
-  member   = "serviceAccount:${google_service_account.sa.email}"
-}
-
 # The following variables must be set to allow runs
 # to authenticate to GCP.
 resource "tfe_variable" "enable_gcp_provider_auth" {
@@ -69,7 +54,7 @@ resource "tfe_variable" "tfc_gcp_service_account_email" {
   workspace_id = tfe_workspace.tfc_workspace.id
 
   key      = "TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL"
-  value    = google_service_account.sa.email
+  value    = module.oidc.service_account
   category = "env"
 
   description = "The GCP service account email runs will use to authenticate."
@@ -77,18 +62,12 @@ resource "tfe_variable" "tfc_gcp_service_account_email" {
 
 # Use the OIDC module to provision the Workload identitly pool
 module "oidc" {
-  project_id  = var.project_id
-  source      = "../../modules/tfc-oidc"
-  pool_id     = "pool-${random_string.suffix.result}"
-  provider_id = "terraform-provider-${random_string.suffix.result}"
-  sa_mapping = {
-    (google_service_account.sa.account_id) = {
-      sa_name   = google_service_account.sa.name
-      sa_email  = google_service_account.sa.email
-      attribute = "*"
-    }
-  }
+  project_id            = var.project_id
+  source                = "../../modules/tfc-oidc"
+  pool_id               = "pool-${random_string.suffix.result}"
+  provider_id           = "terraform-provider-${random_string.suffix.result}"
   tfc_organization_name = data.tfe_organization.tfc_org.name
   tfc_project_name      = tfe_project.tfc_project.name
   tfc_workspace_name    = tfe_workspace.tfc_workspace.name
+  role_list             = ["roles/storage.admin"]
 }
