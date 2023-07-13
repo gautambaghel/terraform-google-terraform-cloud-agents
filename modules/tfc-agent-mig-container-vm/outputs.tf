@@ -16,12 +16,12 @@ output "mig_instance_template" {
 }
 
 output "network_name" {
-  description = "Name of VPC"
+  description = "Name of the VPC"
   value       = local.network_name
 }
 
 output "subnet_name" {
-  description = "Name of VPC"
+  description = "Name of the subnet in the VPC"
   value       = local.subnet_name
 }
 

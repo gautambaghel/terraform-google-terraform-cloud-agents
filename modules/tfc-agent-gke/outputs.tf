@@ -33,6 +33,11 @@ output "network_name" {
   value       = local.network_name
 }
 
+output "subnet_name" {
+  description = "Name of the subnet in the VPC"
+  value       = local.subnet_name
+}
+
 output "location" {
   description = "GKE Cluster location"
   value       = module.tfc_agent_cluster.location

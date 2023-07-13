@@ -54,14 +54,14 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 
 | Name | Description |
 |------|-------------|
-| ca\_certificate | The cluster ca certificate (base64 encoded) |
+| ca\_certificate | The cluster CA certificate (base64 encoded) |
 | client\_token | The bearer token for auth |
-| cluster\_name | Cluster name |
-| kubernetes\_endpoint | The cluster endpoint |
-| location | Cluster location |
-| network\_name | Name of VPC |
-| service\_account | The default service account used for TFC agent nodes. |
-| subnet\_name | Name of VPC |
+| cluster\_name | GKE Cluster name |
+| kubernetes\_endpoint | The GKE cluster endpoint |
+| location | GKE Cluster location |
+| network\_name | Name of the VPC |
+| service\_account | The default service account used for TFC Agent nodes. |
+| subnet\_name | Name of the subnet in the VPC |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

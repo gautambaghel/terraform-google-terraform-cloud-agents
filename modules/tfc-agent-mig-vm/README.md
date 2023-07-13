@@ -56,9 +56,8 @@ This example shows how to deploy a MIG self hosted Terraform Cloud Agent bootstr
 | mig\_instance\_group | The instance group url of the created MIG |
 | mig\_instance\_template | The name of the MIG Instance Template |
 | mig\_name | The name of the MIG |
-| network\_name | Name of VPC |
-| service\_account | Service account email for GCE |
-| subnet\_name | Name of VPC |
+| network\_name | Name of the VPC |
+| service\_account | Service account email used with the MIG template |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
