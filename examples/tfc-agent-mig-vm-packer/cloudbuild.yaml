@@ -1,0 +1,11 @@
+# Copyright (c) HashiCorp, Inc.
+
+steps:
+  - name: "hashicorp/packer:1.9.1"
+    args:
+      - build
+      - -var
+      - project_id=$PROJECT_ID
+      - -var
+      - tfc_agent_version=${_TFC_AGENT_VERSION}
+      - packer.json

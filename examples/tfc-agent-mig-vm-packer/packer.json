@@ -1,0 +1,72 @@
+{
+    "variables": {
+        "source_image_family": "ubuntu-2204-lts",
+        "source_image_project_id": "ubuntu-os-cloud",
+        "machine_type": "n1-standard-4",
+        "disk_size": "50",
+        "disk_type": "pd-ssd",
+        "image_name": "tfc-agent-image-{{timestamp}}",
+        "image_family": "tfc-agent-image",
+        "ssh_username": "ubuntu",
+        "region": "us-central1",
+        "zone": "us-central1-a",
+        "project_id": "{{env `PACKER_PROJECT_ID`}}",
+        "tfc_agent_version": "{{env `TFC_AGENT_VERSION`}}"
+    },
+    "builders": [
+        {
+        "type": "googlecompute",
+        "project_id": "{{user `project_id`}}",
+        "source_image_family": "{{user `source_image_family`}}",
+        "source_image_project_id": "{{user `source_image_project_id`}}",
+        "zone": "{{user `zone`}}",
+        "machine_type": "{{user `machine_type`}}",
+        "disk_size": "{{user `disk_size`}}",
+        "ssh_username": "{{user `ssh_username`}}",
+        "image_name": "{{user `image_name`}}",
+        "image_family": "{{user `source_image_family`}}",
+        "disable_default_service_account": false,
+        "metadata": {
+            "enable-oslogin": "true",
+            "new_nodes_topic": "new-instances-0001"
+        }
+        }
+    ],
+    "provisioners": [
+        {
+        "type": "shell",
+        "environment_vars": ["DEBIAN_FRONTEND=noninteractive"],
+        "inline": [
+            "apt-get update",
+            "apt-get dist-upgrade -y",
+            "apt-get update",
+            "apt-get install -y apt-transport-https ca-certificates curl unzip tar jq build-essential gnupg2 software-properties-common",
+            "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+            "add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
+            "apt-get update",
+            "apt-get install -y docker-ce",
+            "usermod -aG docker ubuntu"
+        ],
+        "execute_command": "sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+        },
+        {
+        "type": "shell",
+        "environment_vars": ["DEBIAN_FRONTEND=noninteractive"],
+        "inline": [
+            "curl -Os https://releases.hashicorp.com/tfc-agent/{{user `tfc_agent_version`}}/tfc-agent_{{user `tfc_agent_version`}}_linux_amd64.zip",
+            "curl -Os https://releases.hashicorp.com/tfc-agent/{{user `tfc_agent_version`}}/tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS",
+            "curl -Os https://releases.hashicorp.com/tfc-agent/{{user `tfc_agent_version`}}/tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS.sig",
+            "curl -o hashicorp.asc https://www.hashicorp.com/.well-known/pgp-key.txt",
+            "gpg --import hashicorp.asc",
+            "gpg --verify tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS.sig tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS",
+            "shasum -a 256 -c tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS",
+            "mkdir /agent",
+            "unzip tfc-agent_{{user `tfc_agent_version`}}_linux_amd64.zip -d /agent",
+            "rm tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS",
+            "rm tfc-agent_{{user `tfc_agent_version`}}_SHA256SUMS.sig",
+            "rm -f tfc-agent_{{user `tfc_agent_version`}}_linux_amd64.zip"
+        ],
+        "execute_command": "sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+        }
+    ]
+}
