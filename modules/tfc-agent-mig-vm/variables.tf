@@ -162,6 +162,6 @@ variable "tfc_agent_version" {
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud agent token. (TFC Organization Settings >> agents)"
+  description = "Terraform Cloud agent token. (Organization Settings >> Agents)"
   sensitive   = true
 }

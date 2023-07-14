@@ -47,7 +47,7 @@ This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 | tfc\_agent\_memory\_request | Memory request for the Terraform Cloud agent container | `string` | `"2Gi"` | no |
 | tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
 | tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
-| tfc\_agent\_token | Terraform Cloud agent token. (TFC Organization Settings >> agents) | `string` | n/a | yes |
+| tfc\_agent\_token | Terraform Cloud agent token. (Organization Settings >> Agents) | `string` | n/a | yes |
 | zones | The GCP zone to use when deploying resources | `list(string)` | <pre>[<br>  "us-central1-a"<br>]</pre> | no |
 
 ## Outputs

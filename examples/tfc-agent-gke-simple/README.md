@@ -33,7 +33,7 @@ If running from your own system, you will need:
     terraform apply
     ```
 
-1. Your Terraform Cloud agents should become active at Organization Setting > Security > agents.
+1. Your Terraform Cloud agents should become active at Organization Setting > Security > Agents.
 
 1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud agent. [Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
