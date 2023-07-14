@@ -134,6 +134,7 @@ variable "tfc_agent_token" {
   type        = string
   description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
   sensitive   = true
+  default     = ""
 }
 
 variable "tfc_agent_image" {
@@ -152,4 +153,40 @@ variable "tfc_agent_cpu_request" {
   type        = string
   description = "CPU request for the Terraform Cloud Agent container"
   default     = "2"
+}
+
+variable "tfc_agent_replicas" {
+  type        = string
+  description = "Deployment replicas for Terraform Cloud Agent"
+  default     = "2"
+}
+
+variable "tfc_agent_min_replicas" {
+  type        = string
+  description = "Minimum replicas for the Terraform Cloud Agent pod autoscaler"
+  default     = "2"
+}
+
+variable "tfc_agent_max_replicas" {
+  type        = string
+  description = "Maximum replicas for the Terraform Cloud Agent pod autoscaler"
+  default     = "10"
+}
+
+variable "tfc_agent_average_utilization" {
+  type        = string
+  description = "Average CPU utilization for the Terraform Cloud Agent for autoscaling"
+  default     = "50"
+}
+
+variable "tfc_operator_create" {
+  type        = bool
+  description = "Set true, if using the Terraform Cloud Operator"
+  default     = false
+}
+
+variable "tfc_operator_values" {
+  type        = any
+  description = "The values.yaml file used for deploying Terraform Cloud Operator"
+  default     = {}
 }

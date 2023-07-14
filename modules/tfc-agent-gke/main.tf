@@ -94,8 +94,21 @@ resource "kubernetes_secret" "tfc_agent_secrets" {
   }
 }
 
+# Deploy the Terraform Cloud Operator
+resource "helm_release" "tfc_operator" {
+  count            = var.tfc_operator_create ? 1 : 0
+  repository       = "https://helm.releases.hashicorp.com"
+  chart            = "terraform-cloud-operator"
+  namespace        = "terraform-cloud-operator-system"
+  name             = "${local.tfc_agent_name}-release"
+  values           = var.tfc_operator_values
+  create_namespace = true
+  devel            = true
+}
+
 # Deploy the Agent
 resource "kubernetes_deployment" "tfc_agent_deployment" {
+  count = var.tfc_operator_create ? 0 : 1
   metadata {
     name = "${local.tfc_agent_name}-deployment"
   }
@@ -107,7 +120,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
       }
     }
 
-    replicas = 2
+    replicas = var.tfc_agent_replicas
 
     template {
       metadata {
@@ -186,6 +199,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
 
 # Deploy a horizontal pod autoscaler for the Agent
 resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
+  count = var.tfc_operator_create ? 0 : 1
   metadata {
     name = "${local.tfc_agent_name}-deployment-hpa"
   }
@@ -196,8 +210,8 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
       name = "${local.tfc_agent_name}-deployment"
     }
 
-    min_replicas = 2
-    max_replicas = 10
+    min_replicas = var.tfc_agent_min_replicas
+    max_replicas = var.tfc_agent_max_replicas
 
     metric {
       type = "Resource"
@@ -207,7 +221,7 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
 
         target {
           type                = "Utilization"
-          average_utilization = 50
+          average_utilization = var.tfc_agent_average_utilization
         }
       }
     }

@@ -1,0 +1,19 @@
+# Copyright (c) HashiCorp, Inc.
+
+replicaCount: 1
+
+operator:
+  image:
+    repository: hashicorp/terraform-cloud-operator
+    pullPolicy: Always
+  
+  # Operator-global options.
+  # The minimum frequency at which watched resources are reconciled.
+  # Format: 5s, 1m, etc.
+  syncPeriod: "2m"
+
+  # List of namespaces the controllers should monitor
+  watchedNamespaces: []
+
+  # The API URL of a TFE instance
+  tfeAddress: "https://app.terraform.io"

@@ -42,3 +42,13 @@ output "location" {
   description = "Cluster location"
   value       = module.tfc_agent_cluster.location
 }
+
+output "tfc_agent_k8s_secrets" {
+  description = "Name for the k8s secret that configures TFC Agent on GKE"
+  value       = var.tfc_agent_k8s_secrets
+}
+
+output "tfc_agent_pool_name" {
+  description = "Generated name for the TFC Agent pool"
+  value       = local.tfc_agent_name
+}
