@@ -32,7 +32,7 @@ It creates the Terraform Cloud agent pool, registers the agent to that pool and 
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| project\_id | The project id to deploy Terraform Cloud agent MIG | `string` | n/a | yes |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud agent MIG | `string` | n/a | yes |
 | tfc\_agent\_pool\_name | Terraform Cloud agent pool name to be created | `string` | `"tfc-agent-mig-vm-simple-pool"` | no |
 | tfc\_agent\_pool\_token\_description | Terraform Cloud agent pool token description | `string` | `"tfc-agent-mig-vm-simple-pool-token"` | no |
 | tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
@@ -46,6 +46,6 @@ It creates the Terraform Cloud agent pool, registers the agent to that pool and 
 | mig\_instance\_group | The instance group url of the created MIG |
 | mig\_instance\_template | The name of the MIG Instance Template |
 | mig\_name | The name of the MIG |
-| service\_account | Service account email for GCE |
+| service\_account | Service account email used with the MIG template |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

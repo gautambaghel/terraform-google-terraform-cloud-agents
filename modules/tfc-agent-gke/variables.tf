@@ -106,7 +106,7 @@ variable "tfc_agent_k8s_secrets" {
 
 variable "tfc_agent_address" {
   type        = string
-  description = "The HTTP or HTTPS address of the Terraform Cloud/Enterprise API."
+  description = "The HTTP or HTTPS address of the Terraform Cloud/Enterprise API"
   default     = "https://app.terraform.io"
 }
 

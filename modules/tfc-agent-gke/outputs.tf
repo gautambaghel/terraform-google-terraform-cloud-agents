@@ -19,12 +19,12 @@ output "ca_certificate" {
 }
 
 output "service_account" {
-  description = "The default service account used for TFC agent nodes."
+  description = "The default service account used for TFC agent nodes"
   value       = module.tfc_agent_cluster.service_account
 }
 
 output "cluster_name" {
-  description = "GKE Cluster name"
+  description = "GKE cluster name"
   value       = module.tfc_agent_cluster.name
 }
 
@@ -39,6 +39,6 @@ output "subnet_name" {
 }
 
 output "location" {
-  description = "GKE Cluster location"
+  description = "GKE cluster location"
   value       = module.tfc_agent_cluster.location
 }

@@ -74,7 +74,7 @@ If running from your own system, you will need:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| project\_id | The project id to deploy Terraform Cloud agent | `string` | n/a | yes |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud agent cluster | `string` | n/a | yes |
 | tfc\_agent\_image | The custom Terraform Cloud agent image to use | `string` | n/a | yes |
 | tfc\_agent\_pool\_name | Terraform Cloud agent pool name to be created | `string` | `"tfc-agent-gke-custom-pool"` | no |
 | tfc\_agent\_pool\_token\_description | Terraform Cloud agent pool token description | `string` | `"tfc-agent-gke-custom-pool-token"` | no |
@@ -86,13 +86,13 @@ If running from your own system, you will need:
 
 | Name | Description |
 |------|-------------|
-| ca\_certificate | The cluster ca certificate (base64 encoded) |
+| ca\_certificate | The cluster CA certificate (base64 encoded) |
 | client\_token | The bearer token for auth |
-| cluster\_name | Cluster name |
+| cluster\_name | GKE cluster name |
 | kubernetes\_endpoint | The cluster endpoint |
-| location | Cluster location |
-| network\_name | Name of VPC |
-| service\_account | The default service account used for running nodes. |
-| subnet\_name | Name of VPC |
+| location | GKE cluster location |
+| network\_name | Name of the VPC |
+| service\_account | The default service account used for TFC agent nodes |
+| subnet\_name | Name of the subnet in the VPC |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

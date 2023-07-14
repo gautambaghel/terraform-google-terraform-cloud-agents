@@ -2,7 +2,7 @@
 
 variable "project_id" {
   type        = string
-  description = "The project id to deploy Terraform agent MIG"
+  description = "The Google Cloud Platform project ID to deploy Terraform Cloud agent MIG"
 }
 
 variable "tfc_org_name" {

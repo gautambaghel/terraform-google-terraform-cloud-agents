@@ -39,7 +39,7 @@ This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 | service\_account | Optional Service Account for the GKE nodes | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.0.0.0/17"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
-| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
+| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
 | tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud agent container | `string` | `"2"` | no |
 | tfc\_agent\_image | The Terraform Cloud agent image to use | `string` | `"hashicorp/tfc-agent:latest"` | no |
@@ -56,11 +56,11 @@ This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 |------|-------------|
 | ca\_certificate | The cluster CA certificate (base64 encoded) |
 | client\_token | The bearer token for auth |
-| cluster\_name | GKE Cluster name |
+| cluster\_name | GKE cluster name |
 | kubernetes\_endpoint | The GKE cluster endpoint |
-| location | GKE Cluster location |
+| location | GKE cluster location |
 | network\_name | Name of the VPC |
-| service\_account | The default service account used for TFC agent nodes. |
+| service\_account | The default service account used for TFC agent nodes |
 | subnet\_name | Name of the subnet in the VPC |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
