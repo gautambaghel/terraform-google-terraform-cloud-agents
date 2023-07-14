@@ -34,6 +34,9 @@ resource "kubernetes_manifest" "tfc_operator_workspace" {
       "name" = var.tfc_workspace_name
     }
   }
+
+  # Resource doesn't destroy properly if the secret is removed first
+  depends_on = [kubernetes_secret.tfc_team_token_secret]
 }
 
 # Create the AgentPool Custom Resource to deploy the Agent
