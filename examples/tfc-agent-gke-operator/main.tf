@@ -33,7 +33,7 @@ resource "local_file" "terraform_vars" {
   EOF
 }
 
-# Create the infrastructure for the Agent to run
+# Create the infrastructure for the agent to run
 module "tfc_agent_gke" {
   source              = "../../modules/tfc-agent-gke"
   project_id          = var.project_id
