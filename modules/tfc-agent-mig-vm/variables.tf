@@ -2,7 +2,7 @@
 
 variable "project_id" {
   type        = string
-  description = "The Google Cloud Platform project ID to deploy Terraform Cloud Agent"
+  description = "The Google Cloud Platform project ID to deploy Terraform Cloud agent"
 }
 
 variable "region" {
@@ -46,13 +46,13 @@ variable "subnet_name" {
 
 variable "min_replicas" {
   type        = number
-  description = "Minimum number of Terraform Agent instances"
+  description = "Minimum number of Terraform agent instances"
   default     = 1
 }
 
 variable "max_replicas" {
   type        = number
-  description = "Maximum number of Terraform Agent instances"
+  description = "Maximum number of Terraform agent instances"
   default     = 10
 }
 
@@ -150,18 +150,18 @@ variable "tfc_agent_name_prefix" {
 
 variable "tfc_agent_labels" {
   type        = set(string)
-  description = "Terraform Cloud Agent labels to attach to the VMs"
+  description = "Terraform Cloud agent labels to attach to the VMs"
   default     = []
 }
 
 variable "tfc_agent_version" {
   type        = string
-  description = "Terraform Cloud Agent version to install"
+  description = "Terraform Cloud agent version to install"
   default     = "1.10.0"
 }
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
+  description = "Terraform Cloud agent token. (TFC Organization Settings >> agents)"
   sensitive   = true
 }

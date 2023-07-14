@@ -1,10 +1,10 @@
 # terraform-google-terraform-cloud-agents
 
-Creates self hosted Terraform Cloud Agents on Google Cloud. Using these Terraform modules you can quickly deploy agent pools for your Terraform Cloud workflows.
+Creates self hosted Terraform Cloud agents on Google Cloud. Using these Terraform modules you can quickly deploy agent pools for your Terraform Cloud workflows.
 
-## [Terraform Cloud Agents on GKE](modules/tfc-agent-gke/README.md)
+## [Terraform Cloud agents on GKE](modules/tfc-agent-gke/README.md)
 
-The `tfc-agent-gke` module provisions the resources required to deploy self hosted Terraform Cloud Agents on Google Cloud infrastructure using Google Kubernetes Engine (GKE).
+The `tfc-agent-gke` module provisions the resources required to deploy self hosted Terraform Cloud agents on Google Cloud infrastructure using Google Kubernetes Engine (GKE).
 
 This includes
 
@@ -15,12 +15,12 @@ This includes
 
 *Below are some examples:*
 
-- [Simple Terraform Cloud Agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
-- [Custom Terraform Cloud Agents on GKE](examples/tfc-agent-gke-custom/README.md) - This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
+- [Simple Terraform Cloud agents on GKE](examples/tfc-agent-gke-simple/README.md) - This example shows how to deploy a simple GKE self hosted Terraform Cloud agent.
+- [Custom Terraform Cloud agents on GKE](examples/tfc-agent-gke-custom/README.md) - This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 
-## [Terraform Cloud Agents on Managed Instance Groups using VMs](modules/tfc-agent-mig-vm/README.md)
+## [Terraform Cloud agents on Managed Instance Groups using VMs](modules/tfc-agent-mig-vm/README.md)
 
-The `tfc-agent-mig-vm` module provisions the resources required to deploy Terrform Cloud Agent on Google Cloud infrastructure using Managed Instance Groups.
+The `tfc-agent-mig-vm` module provisions the resources required to deploy Terrform Cloud agent on Google Cloud infrastructure using Managed Instance Groups.
 
 This includes
 
@@ -37,11 +37,11 @@ Deployment of Managed Instance Groups requires a [Google VM image](https://cloud
 
 *Below are some examples:*
 
-- [Terraform Cloud Agents on MIG VMs](examples/tfc-agent-mig-native-simple/README.md) - This example shows how to deploy a MIG Terraform Cloud Agent with startup scripts.
+- [Terraform Cloud agents on MIG VMs](examples/tfc-agent-mig-native-simple/README.md) - This example shows how to deploy a MIG Terraform Cloud agent with startup scripts.
 
-## [Terraform Cloud Agents Instance Groups using Container VMs](modules/tfc-agent-mig-container-vm/README.md)
+## [Terraform Cloud agents Instance Groups using Container VMs](modules/tfc-agent-mig-container-vm/README.md)
 
-The `tfc-agent-mig-container-vm` module provisions the resources required to deploy Terraform Cloud Agents on Google Cloud infrastructure using Managed Instance Groups and Container VMs.
+The `tfc-agent-mig-container-vm` module provisions the resources required to deploy Terraform Cloud agents on Google Cloud infrastructure using Managed Instance Groups and Container VMs.
 
 This includes
 
@@ -54,7 +54,7 @@ This includes
 
 *Below are some examples:*
 
-- [Terraform Cloud Agents on MIG Container VMs](examples/tfc-agent-mig-container-vm-simple/README.md) - This example shows how to deploy a Terraform Cloud Agent on MIG Container VMs.
+- [Terraform Cloud agents on MIG Container VMs](examples/tfc-agent-mig-container-vm-simple/README.md) - This example shows how to deploy a Terraform Cloud agent on MIG Container VMs.
 
 ## [Configure trust between Terraform and Google Cloud](modules/tfc-oidc/README.md)
 

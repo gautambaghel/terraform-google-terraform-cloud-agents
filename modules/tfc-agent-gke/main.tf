@@ -43,7 +43,7 @@ resource "google_compute_subnetwork" "tfc_agent_subnetwork" {
 }
 
 /*****************************************
-  TFC Agent GKE
+  TFC agent GKE
  *****************************************/
 
 module "tfc_agent_cluster" {
@@ -94,7 +94,7 @@ resource "kubernetes_secret" "tfc_agent_secrets" {
   }
 }
 
-# Deploy the Agent
+# Deploy the agent
 resource "kubernetes_deployment" "tfc_agent_deployment" {
   metadata {
     name = "${local.tfc_agent_name}-deployment"
@@ -184,7 +184,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
   }
 }
 
-# Deploy a horizontal pod autoscaler for the Agent
+# Deploy a horizontal pod autoscaler for the agent
 resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
   metadata {
     name = "${local.tfc_agent_name}-deployment-hpa"

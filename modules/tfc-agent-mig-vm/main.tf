@@ -14,7 +14,7 @@ resource "random_string" "suffix" {
 }
 
 /*****************************************
-  Optional Terraform Agent Networking
+  Optional Terraform agent Networking
  *****************************************/
 
 resource "google_compute_network" "tfc_agent_network" {
@@ -59,11 +59,11 @@ resource "google_service_account" "tfc_agent_service_account" {
   count        = var.service_account == "" ? 1 : 0
   project      = var.project_id
   account_id   = "tfc-agent-mig-vm-sa"
-  display_name = "Terraform Cloud Agent GCE Service Account"
+  display_name = "Terraform Cloud agent GCE Service Account"
 }
 
 /*****************************************
-  Terraform Agent Secrets
+  Terraform agent Secrets
  *****************************************/
 
 resource "google_secret_manager_secret" "tfc_agent_secret" {
@@ -107,7 +107,7 @@ resource "google_secret_manager_secret_iam_member" "tfc_agent_secret_member" {
 }
 
 /*****************************************
-  Terraform Agent GCE Instance Template
+  Terraform agent GCE Instance Template
  *****************************************/
 
 module "mig_template" {
@@ -142,7 +142,7 @@ module "mig_template" {
 }
 
 /*****************************************
-  Terraform Agent MIG
+  Terraform agent MIG
  *****************************************/
 
 module "mig" {

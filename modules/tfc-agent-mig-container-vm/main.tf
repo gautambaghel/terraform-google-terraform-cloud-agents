@@ -27,7 +27,7 @@ resource "random_string" "suffix" {
 }
 
 /*****************************************
-  Optional TFC Agent Networking
+  Optional TFC agent Networking
  *****************************************/
 
 resource "google_compute_network" "tfc_agent_network" {
@@ -72,7 +72,7 @@ resource "google_service_account" "tfc_agent_service_account" {
   count        = var.service_account == "" ? 1 : 0
   project      = var.project_id
   account_id   = "tfc-agent-mig-container-vm-sa"
-  display_name = "Terrform Agent GCE Service Account"
+  display_name = "Terrform agent GCE Service Account"
 }
 
 # allow GCE to pull images from GCR
@@ -86,7 +86,7 @@ resource "google_project_iam_binding" "gce" {
 }
 
 /*****************************************
-  TFC Agent GCE Instance Template
+  TFC agent GCE Instance Template
  *****************************************/
 
 module "gce_container" {
@@ -177,7 +177,7 @@ module "mig_template" {
 }
 
 /*****************************************
-  TFC Agent MIG
+  TFC agent MIG
  *****************************************/
 
 module "mig" {

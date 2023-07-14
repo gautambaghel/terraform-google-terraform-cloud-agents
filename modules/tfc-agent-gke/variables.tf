@@ -2,7 +2,7 @@
 
 variable "project_id" {
   type        = string
-  description = "The Google Cloud Platform project ID to deploy Terraform Cloud Agent cluster"
+  description = "The Google Cloud Platform project ID to deploy Terraform Cloud agent cluster"
 }
 
 variable "region" {
@@ -76,19 +76,19 @@ variable "network_project_id" {
 
 variable "machine_type" {
   type        = string
-  description = "Machine type for TFC Agent node pool"
+  description = "Machine type for TFC agent node pool"
   default     = "n1-standard-4"
 }
 
 variable "max_node_count" {
   type        = number
-  description = "Maximum number of nodes in the TFC Agent node pool"
+  description = "Maximum number of nodes in the TFC agent node pool"
   default     = 4
 }
 
 variable "min_node_count" {
   type        = number
-  description = "Minimum number of nodes in the TFC Agent node pool"
+  description = "Minimum number of nodes in the TFC agent node pool"
   default     = 2
 }
 
@@ -100,7 +100,7 @@ variable "service_account" {
 
 variable "tfc_agent_k8s_secrets" {
   type        = string
-  description = "Name for the k8s secret required to configure TFC Agent on GKE"
+  description = "Name for the k8s secret required to configure TFC agent on GKE"
   default     = "tfc-agent-k8s-secrets"
 }
 
@@ -113,8 +113,8 @@ variable "tfc_agent_address" {
 variable "tfc_agent_single" {
   type        = bool
   description = <<-EOF
-    Enable single mode. This causes the Agent to handle at most one job and
-    immediately exit thereafter. Useful for running Agents as ephemeral
+    Enable single mode. This causes the agent to handle at most one job and
+    immediately exit thereafter. Useful for running agents as ephemeral
     containers, VMs, or other isolated contexts with a higher-level scheduler
     or process supervisor.
   EOF
@@ -129,30 +129,30 @@ variable "tfc_agent_auto_update" {
 
 variable "tfc_agent_name_prefix" {
   type        = string
-  description = "This name may be used in the Terraform Cloud user interface to help easily identify the Agent"
+  description = "This name may be used in the Terraform Cloud user interface to help easily identify the agent"
   default     = "tfc-agent-k8s"
 }
 
 variable "tfc_agent_image" {
   type        = string
-  description = "The Terraform Cloud Agent image to use"
+  description = "The Terraform Cloud agent image to use"
   default     = "hashicorp/tfc-agent:latest"
 }
 
 variable "tfc_agent_memory_request" {
   type        = string
-  description = "Memory request for the Terraform Cloud Agent container"
+  description = "Memory request for the Terraform Cloud agent container"
   default     = "2Gi"
 }
 
 variable "tfc_agent_cpu_request" {
   type        = string
-  description = "CPU request for the Terraform Cloud Agent container"
+  description = "CPU request for the Terraform Cloud agent container"
   default     = "2"
 }
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
+  description = "Terraform Cloud agent token. (TFC Organization Settings >> agents)"
   sensitive   = true
 }

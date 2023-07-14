@@ -19,7 +19,7 @@ output "ca_certificate" {
 }
 
 output "service_account" {
-  description = "The default service account used for TFC Agent nodes."
+  description = "The default service account used for TFC agent nodes."
   value       = module.tfc_agent_cluster.service_account
 }
 

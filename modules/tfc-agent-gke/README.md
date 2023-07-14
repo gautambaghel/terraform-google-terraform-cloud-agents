@@ -1,6 +1,6 @@
-# Self Hosted Terraform Cloud Agent on GKE
+# Self Hosted Terraform Cloud agent on GKE
 
-This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud Agents on Google Kubernetes Engine (GKE).
+This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud agents on Google Kubernetes Engine (GKE).
 
 This includes:
 
@@ -11,13 +11,13 @@ This includes:
 
 Below are some examples:
 
-## [Simple Terraform Cloud Agents on GKE](../../examples/tfc-agent-gke-simple/README.md)
+## [Simple Terraform Cloud agents on GKE](../../examples/tfc-agent-gke-simple/README.md)
 
-This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
+This example shows how to deploy a simple GKE self hosted Terraform Cloud agent.
 
-## [Custom Terraform Cloud Agents on GKE](../../examples/tfc-agent-gke-custom/README.md)
+## [Custom Terraform Cloud agents on GKE](../../examples/tfc-agent-gke-custom/README.md)
 
-This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
+This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -29,25 +29,25 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 | ip\_range\_pods\_name | The secondary IP range to use for pods | `string` | `"ip-range-pods"` | no |
 | ip\_range\_services\_cider | The secondary IP range CIDR to use for services | `string` | `"192.168.64.0/18"` | no |
 | ip\_range\_services\_name | The secondary IP range to use for services | `string` | `"ip-range-scv"` | no |
-| machine\_type | Machine type for TFC Agent node pool | `string` | `"n1-standard-4"` | no |
-| max\_node\_count | Maximum number of nodes in the TFC Agent node pool | `number` | `4` | no |
-| min\_node\_count | Minimum number of nodes in the TFC Agent node pool | `number` | `2` | no |
+| machine\_type | Machine type for TFC agent node pool | `string` | `"n1-standard-4"` | no |
+| max\_node\_count | Maximum number of nodes in the TFC agent node pool | `number` | `4` | no |
+| min\_node\_count | Minimum number of nodes in the TFC agent node pool | `number` | `2` | no |
 | network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
 | network\_project\_id | The project ID of the shared VPCs host (for shared vpc support). <br>If not provided, the project\_id is used | `string` | `""` | no |
-| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud Agent cluster | `string` | n/a | yes |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud agent cluster | `string` | n/a | yes |
 | region | The GCP region to use when deploying resources | `string` | `"us-central1"` | no |
 | service\_account | Optional Service Account for the GKE nodes | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.0.0.0/17"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
 | tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
-| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud Agent container | `string` | `"2"` | no |
-| tfc\_agent\_image | The Terraform Cloud Agent image to use | `string` | `"hashicorp/tfc-agent:latest"` | no |
-| tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC Agent on GKE | `string` | `"tfc-agent-k8s-secrets"` | no |
-| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud Agent container | `string` | `"2Gi"` | no |
-| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the Agent | `string` | `"tfc-agent-k8s"` | no |
-| tfc\_agent\_single | Enable single mode. This causes the Agent to handle at most one job and<br>immediately exit thereafter. Useful for running Agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
-| tfc\_agent\_token | Terraform Cloud Agent token. (TFC Organization Settings >> Agents) | `string` | n/a | yes |
+| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud agent container | `string` | `"2"` | no |
+| tfc\_agent\_image | The Terraform Cloud agent image to use | `string` | `"hashicorp/tfc-agent:latest"` | no |
+| tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC agent on GKE | `string` | `"tfc-agent-k8s-secrets"` | no |
+| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud agent container | `string` | `"2Gi"` | no |
+| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
+| tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
+| tfc\_agent\_token | Terraform Cloud agent token. (TFC Organization Settings >> agents) | `string` | n/a | yes |
 | zones | The GCP zone to use when deploying resources | `list(string)` | <pre>[<br>  "us-central1-a"<br>]</pre> | no |
 
 ## Outputs
@@ -60,7 +60,7 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 | kubernetes\_endpoint | The GKE cluster endpoint |
 | location | GKE Cluster location |
 | network\_name | Name of the VPC |
-| service\_account | The default service account used for TFC Agent nodes. |
+| service\_account | The default service account used for TFC agent nodes. |
 | subnet\_name | Name of the subnet in the VPC |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

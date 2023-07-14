@@ -2,7 +2,7 @@
 
 variable "project_id" {
   type        = string
-  description = "The Google Cloud Platform project ID to deploy Terraform Cloud Agent"
+  description = "The Google Cloud Platform project ID to deploy Terraform Cloud agent"
 }
 
 variable "region" {
@@ -52,13 +52,13 @@ variable "restart_policy" {
 
 variable "image" {
   type        = string
-  description = "The Terraform Cloud Agent image"
+  description = "The Terraform Cloud agent image"
   default     = "hashicorp/tfc-agent:latest"
 }
 
 variable "target_size" {
   type        = number
-  description = "The number of Terraform Cloud Agent instances"
+  description = "The number of Terraform Cloud agent instances"
   default     = 2
 }
 
@@ -125,6 +125,6 @@ variable "tfc_agent_name_prefix" {
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
+  description = "Terraform Cloud agent token. (TFC Organization Settings >> agents)"
   sensitive   = true
 }
