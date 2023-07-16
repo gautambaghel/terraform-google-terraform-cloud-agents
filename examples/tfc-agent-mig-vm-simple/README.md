@@ -11,8 +11,8 @@ It creates the Terraform Cloud agent pool, registers the agent to that pool and 
 1. Create terraform.tfvars file with the necessary values. The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
-    project_id      = "your-project-id"
-    tfc_agent_token = "your-tfc-agent-token"
+    project_id   = "your-project-id"
+    tfc_org_name = "your-tfc-org-name"
     ```
 
 1. Create the infrastructure.
