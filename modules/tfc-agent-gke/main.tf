@@ -43,7 +43,7 @@ resource "google_compute_subnetwork" "tfc_agent_subnetwork" {
 }
 
 /*****************************************
-  TFC Agent GKE
+  TFC agent GKE
  *****************************************/
 
 module "tfc_agent_cluster" {
@@ -197,7 +197,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
   }
 }
 
-# Deploy a horizontal pod autoscaler for the Agent
+# Deploy a horizontal pod autoscaler for the agent
 resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
   count = var.tfc_operator_create ? 0 : 1
   metadata {

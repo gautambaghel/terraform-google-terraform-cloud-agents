@@ -1,6 +1,6 @@
-# Self Hosted Terraform Cloud Agent on GKE
+# Self Hosted Terraform Cloud agent on GKE
 
-This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud Agents on Google Kubernetes Engine (GKE).
+This module handles the opinionated creation of infrastructure necessary to deploy Terraform Cloud agents on Google Kubernetes Engine (GKE).
 
 This includes:
 
@@ -11,13 +11,13 @@ This includes:
 
 Below are some examples:
 
-## [Simple Terraform Cloud Agents on GKE](../../examples/tfc-agent-gke-simple/README.md)
+## [Simple Terraform Cloud agents on GKE](../../examples/tfc-agent-gke-simple/README.md)
 
-This example shows how to deploy a simple GKE self hosted Terraform Cloud Agent.
+This example shows how to deploy a simple GKE self hosted Terraform Cloud agent.
 
-## [Custom Terraform Cloud Agents on GKE](../../examples/tfc-agent-gke-custom/README.md)
+## [Custom Terraform Cloud agents on GKE](../../examples/tfc-agent-gke-custom/README.md)
 
-This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
+This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -25,21 +25,21 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | create\_network | When set to true, VPC will be auto created | `bool` | `true` | no |
-| ip\_range\_pods\_cidr | The secondary ip range cidr to use for pods | `string` | `"192.168.0.0/18"` | no |
-| ip\_range\_pods\_name | The secondary ip range to use for pods | `string` | `"ip-range-pods"` | no |
-| ip\_range\_services\_cider | The secondary ip range cidr to use for services | `string` | `"192.168.64.0/18"` | no |
-| ip\_range\_services\_name | The secondary ip range to use for services | `string` | `"ip-range-scv"` | no |
+| ip\_range\_pods\_cidr | The secondary IP range CIDR to use for pods | `string` | `"192.168.0.0/18"` | no |
+| ip\_range\_pods\_name | The secondary IP range to use for pods | `string` | `"ip-range-pods"` | no |
+| ip\_range\_services\_cider | The secondary IP range CIDR to use for services | `string` | `"192.168.64.0/18"` | no |
+| ip\_range\_services\_name | The secondary IP range to use for services | `string` | `"ip-range-scv"` | no |
 | machine\_type | Machine type for TFC agent node pool | `string` | `"n1-standard-4"` | no |
 | max\_node\_count | Maximum number of nodes in the TFC agent node pool | `number` | `4` | no |
 | min\_node\_count | Minimum number of nodes in the TFC agent node pool | `number` | `2` | no |
 | network\_name | Name for the VPC network | `string` | `"tfc-agent-network"` | no |
-| network\_project\_id | The project ID of the shared VPC’s host (for shared vpc support). If not provided, the project\_id is used. | `string` | `""` | no |
-| project\_id | The project id to deploy Terraform Cloud Agent cluster | `string` | n/a | yes |
-| region | The GCP region to deploy instances into | `string` | `"us-central1"` | no |
-| service\_account | Optional Service Account for the nodes | `string` | `""` | no |
+| network\_project\_id | The project ID of the shared VPCs host (for shared vpc support). <br>If not provided, the project\_id is used | `string` | `""` | no |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud agent cluster | `string` | n/a | yes |
+| region | The GCP region to use when deploying resources | `string` | `"us-central1"` | no |
+| service\_account | Optional Service Account for the GKE nodes | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.0.0.0/17"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
-| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. | `string` | `"https://app.terraform.io"` | no |
+| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API | `string` | `"https://app.terraform.io"` | no |
 | tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
 | tfc\_agent\_average\_utilization | Average CPU utilization for the Terraform Cloud Agent for autoscaling | `string` | `"50"` | no |
 | tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud Agent container | `string` | `"2"` | no |
@@ -60,7 +60,7 @@ This example shows how to deploy a custom Terraform Cloud Agent image with GKE.
 
 | Name | Description |
 |------|-------------|
-| ca\_certificate | The cluster ca certificate (base64 encoded) |
+| ca\_certificate | The cluster CA certificate (base64 encoded) |
 | client\_token | The bearer token for auth |
 | cluster\_name | Cluster name |
 | kubernetes\_endpoint | The cluster endpoint |
