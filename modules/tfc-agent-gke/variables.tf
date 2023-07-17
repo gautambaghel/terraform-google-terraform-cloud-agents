@@ -100,13 +100,19 @@ variable "service_account" {
 
 variable "tfc_agent_k8s_secrets" {
   type        = string
-  description = "Name for the k8s secret required to configure TFC agent on GKE"
+  description = "Name for the k8s secret required to configure TFC agent on GKE. Does not apply if using operator"
   default     = "tfc-agent-k8s-secrets"
+}
+
+variable "tfc_agent_k8s_secrets_namespace" {
+  type        = string
+  description = "Name for the k8s secret required to configure TFC agent on GKE. Does not apply if using operator"
+  default     = "terraform-cloud-operator-system"
 }
 
 variable "tfc_agent_address" {
   type        = string
-  description = "The HTTP or HTTPS address of the Terraform Cloud/Enterprise API"
+  description = "The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. Does not apply if using operator"
   default     = "https://app.terraform.io"
 }
 
@@ -116,69 +122,82 @@ variable "tfc_agent_single" {
     Enable single mode. This causes the agent to handle at most one job and
     immediately exit thereafter. Useful for running agents as ephemeral
     containers, VMs, or other isolated contexts with a higher-level scheduler
-    or process supervisor.
+    or process supervisor. Does not apply if using operator
   EOF
   default     = false
 }
 
 variable "tfc_agent_auto_update" {
   type        = string
-  description = "Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor"
+  description = <<-EOF
+    Controls automatic core updates behavior. 
+    Acceptable values include disabled, patch, and minor. 
+    Does not apply if using operator
+  EOF
   default     = "minor"
 }
 
 variable "tfc_agent_name_prefix" {
   type        = string
-  description = "This name may be used in the Terraform Cloud user interface to help easily identify the agent"
+  description = <<-EOF
+    This name may be used in the Terraform Cloud user interface to help easily identify the agent. 
+    Does not apply if using operator
+  EOF
   default     = "tfc-agent-k8s"
 }
 
 variable "tfc_agent_token" {
   type        = string
-  description = "Terraform Cloud Agent token. (TFC Organization Settings >> Agents)"
+  description = <<-EOF
+    Terraform Cloud Agent token. (TFC Organization Settings >> Agents). 
+    Does not apply if using operator
+  EOF
   sensitive   = true
   default     = ""
 }
 
 variable "tfc_agent_image" {
   type        = string
-  description = "The Terraform Cloud agent image to use"
+  description = "The Terraform Cloud agent image to use. Does not apply if using operator"
   default     = "hashicorp/tfc-agent:latest"
 }
 
 variable "tfc_agent_memory_request" {
   type        = string
-  description = "Memory request for the Terraform Cloud agent container"
+  description = "Memory request for the Terraform Cloud agent container. Does not apply if using operator"
   default     = "2Gi"
 }
 
 variable "tfc_agent_cpu_request" {
   type        = string
-  description = "CPU request for the Terraform Cloud agent container"
+  description = "CPU request for the Terraform Cloud agent container. Does not apply if using operator"
   default     = "2"
 }
 
 variable "tfc_agent_replicas" {
   type        = string
-  description = "Deployment replicas for Terraform Cloud Agent"
+  description = "Deployment replicas for Terraform Cloud Agent. Does not apply if using operator"
   default     = "2"
 }
 
 variable "tfc_agent_min_replicas" {
   type        = string
-  description = "Minimum replicas for the Terraform Cloud Agent pod autoscaler"
+  description = "Minimum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator"
   default     = "2"
 }
 
 variable "tfc_agent_max_replicas" {
   type        = string
-  description = "Maximum replicas for the Terraform Cloud Agent pod autoscaler"
+  description = "Maximum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator"
   default     = "10"
 }
 
 variable "tfc_agent_average_utilization" {
   type        = string
-  description = "Average CPU utilization for the Terraform Cloud Agent for autoscaling"
+  description = <<-EOF
+    Average CPU utilization for the Terraform Cloud Agent for autoscaling. 
+    Does not apply if using operator
+  EOF
   default     = "50"
 }
 
@@ -186,6 +205,18 @@ variable "tfc_operator_create" {
   type        = bool
   description = "Set true, if using the Terraform Cloud Operator"
   default     = false
+}
+
+variable "tfc_operator_create_namespace" {
+  type        = bool
+  description = "Set true, creates a namespace for the Terraform Cloud Operator"
+  default     = true
+}
+
+variable "tfc_operator_version" {
+  type        = string
+  description = "Terraform Cloud Operator version"
+  default     = "2.0.0-beta7"
 }
 
 variable "tfc_operator_values" {

@@ -30,7 +30,13 @@ Controllers usage guides:
 |------|-------------|------|---------|:--------:|
 | ca\_certificate | The Google Kubernetes CA certificate | `string` | n/a | yes |
 | kubernetes\_endpoint | The Google Kubernetes endpoint | `string` | n/a | yes |
+| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud Agent container | `string` | `"2"` | no |
+| tfc\_agent\_image | The Terraform Cloud Agent image to use | `string` | `"hashicorp/tfc-agent"` | no |
+| tfc\_agent\_max\_replicas | Maximum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator | `string` | `"10"` | no |
+| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud Agent container | `string` | `"2Gi"` | no |
+| tfc\_agent\_min\_replicas | Minimum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator | `string` | `"2"` | no |
 | tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-operator-pool"` | no |
+| tfc\_agent\_replicas | Deployment replicas for Terraform Cloud Agent. Does not apply if using operator | `string` | `"2"` | no |
 | tfc\_operator\_namespace | The K8s namespace to deploy Terraform Cloud operator resources | `string` | `"terraform-cloud-operator-system"` | no |
 | tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
 | tfc\_team\_token | The Terraform Cloud Agent image to use | `string` | n/a | yes |

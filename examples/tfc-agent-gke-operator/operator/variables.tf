@@ -44,25 +44,38 @@ variable "tfc_agent_pool_name" {
   default     = "tfc-agent-gke-operator-pool"
 }
 
-# variable "tfc_agent_k8s_secrets" {
-#   type        = string
-#   description = "Name for the K8s secret that stores TFC Agent configurations"
-# }
+variable "tfc_agent_image" {
+  type        = string
+  description = "The Terraform Cloud Agent image to use"
+  default     = "hashicorp/tfc-agent"
+}
 
-# variable "tfc_agent_image" {
-#   type        = string
-#   description = "The Terraform Cloud Agent image to use"
-#   default     = "hashicorp/tfc-agent:latest"
-# }
+variable "tfc_agent_memory_request" {
+  type        = string
+  description = "Memory request for the Terraform Cloud Agent container"
+  default     = "2Gi"
+}
 
-# variable "tfc_agent_memory_request" {
-#   type        = string
-#   description = "Memory request for the Terraform Cloud Agent container"
-#   default     = "2Gi"
-# }
+variable "tfc_agent_cpu_request" {
+  type        = string
+  description = "CPU request for the Terraform Cloud Agent container"
+  default     = "2"
+}
 
-# variable "tfc_agent_cpu_request" {
-#   type        = string
-#   description = "CPU request for the Terraform Cloud Agent container"
-#   default     = "2"
-# }
+variable "tfc_agent_replicas" {
+  type        = string
+  description = "Deployment replicas for Terraform Cloud Agent. Does not apply if using operator"
+  default     = "2"
+}
+
+variable "tfc_agent_min_replicas" {
+  type        = string
+  description = "Minimum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator"
+  default     = "2"
+}
+
+variable "tfc_agent_max_replicas" {
+  type        = string
+  description = "Maximum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator"
+  default     = "10"
+}

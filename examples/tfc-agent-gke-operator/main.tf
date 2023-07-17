@@ -25,7 +25,6 @@ resource "local_file" "terraform_vars" {
 
   content = <<-EOF
   kubernetes_endpoint="https://${module.tfc_agent_gke.kubernetes_endpoint}"
-  client_token="${module.tfc_agent_gke.client_token}"
   ca_certificate="${module.tfc_agent_gke.ca_certificate}"
   tfc_org_name="${data.tfe_organization.tfc_org.name}"
   tfc_team_token="${tfe_team_token.tfc_team_token.token}"

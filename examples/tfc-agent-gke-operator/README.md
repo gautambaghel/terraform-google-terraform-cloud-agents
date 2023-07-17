@@ -16,7 +16,7 @@ If running from your own system, you will need:
 
 ## Steps to deploy this example
 
-1. Create terraform.tfvars file with the necessary values.
+1. Create terraform.auto.tfvars file with the necessary values.
 
     The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
@@ -33,7 +33,7 @@ If running from your own system, you will need:
     terraform apply
     ```
 
-1. Create the operator CRDs.
+1. Deploy the operator CRDs.
 
     ```sh
     cd operator/
