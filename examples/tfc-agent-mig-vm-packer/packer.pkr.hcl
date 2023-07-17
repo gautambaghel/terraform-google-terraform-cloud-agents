@@ -11,58 +11,69 @@ packer {
 }
 
 variable "disk_size" {
-  type    = number
-  default = 10
+  type        = number
+  description = "Size of the disk to create, in GB"
+  default     = 10
 }
 
 variable "disk_type" {
-  type    = string
-  default = "pd-balanced"
+  type        = string
+  description = "Type of disk for the build VM"
+  default     = "pd-balanced"
 }
 
 variable "image_family" {
-  type    = string
-  default = "tfc-agent-image"
+  type        = string
+  description = "Image family for the new image"
+  default     = "tfc-agent-image"
 }
 
 variable "machine_type" {
-  type    = string
-  default = "e2-small"
+  type        = string
+  description = "Machine type for the build VM"
+  default     = "e2-small"
 }
 
 variable "project_id" {
-  type    = string
-  default = "${env("PACKER_PROJECT_ID")}"
+  type        = string
+  description = "The Google Cloud project where the image will be built and stored"
+  default     = "${env("PACKER_PROJECT_ID")}"
 }
 
 variable "region" {
-  type    = string
-  default = "us-central1"
+  type        = string
+  description = "The Google Cloud region where the image will be built"
+  default     = "us-central1"
 }
 
 variable "source_image_family" {
-  type    = string
-  default = "ubuntu-2204-lts"
+  type        = string
+  description = "Source image family for the new custom image"
+  default     = "ubuntu-2204-lts"
 }
 
 variable "source_image_project_id" {
-  type    = string
-  default = "ubuntu-os-cloud"
+  type        = string
+  description = "Project containing the source image"
+  default     = "ubuntu-os-cloud"
 }
 
 variable "ssh_username" {
-  type    = string
-  default = "ubuntu"
+  type        = string
+  description = "User name for SSH provisioner connections"
+  default     = "ubuntu"
 }
 
 variable "tfc_agent_version" {
-  type    = string
-  default = "${env("TFC_AGENT_VERSION")}"
+  type        = string
+  description = "Version of the Terraform Cloud agent to install in the image"
+  default     = "${env("TFC_AGENT_VERSION")}"
 }
 
 variable "zone" {
-  type    = string
-  default = "us-central1-a"
+  type        = string
+  description = "The zone where the image will be built"
+  default     = "us-central1-a"
 }
 
 locals {
