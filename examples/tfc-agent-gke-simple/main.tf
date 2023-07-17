@@ -23,19 +23,19 @@ resource "tfe_workspace" "tfc_workspace" {
   execution_mode = "agent"
 }
 
-# Create a new Agent pool in organization
+# Create a new agent pool in organization
 resource "tfe_agent_pool" "tfc_agent_pool" {
   name         = var.tfc_agent_pool_name
   organization = data.tfe_organization.tfc_org.name
 }
 
-# Create a new token for the Agent pool
+# Create a new token for the agent pool
 resource "tfe_agent_token" "tfc_agent_token" {
   agent_pool_id = tfe_agent_pool.tfc_agent_pool.id
   description   = var.tfc_agent_pool_token_description_description
 }
 
-# Create the infrastructure for the Agent to run
+# Create the infrastructure for the agent to run
 module "tfc_agent_gke" {
   source          = "../../modules/tfc-agent-gke"
   create_network  = true

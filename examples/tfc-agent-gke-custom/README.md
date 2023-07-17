@@ -1,8 +1,8 @@
-# Simple Self Hosted Terraform Cloud Agent on GKE
+# Simple Self Hosted Terraform Cloud agent on GKE
 
 ## Overview
 
-This example shows how to deploy Terraform Cloud Agents on Google Kubernetes Engine (GKE) using the `tfc-agent-gke` module.
+This example shows how to deploy Terraform Cloud agents on Google Kubernetes Engine (GKE) using the `tfc-agent-gke` module.
 
 It creates the Terraform Cloud agent pool, registers the agent to that pool and creates a project and an empty workspace with the agent attached.
 
@@ -23,11 +23,11 @@ If running from your own system, you will need:
     The Terraform Cloud agent token you would like to use. NOTE: This is a secret and should be marked as sensitive in Terraform Cloud.
 
     ```tf
-    project_id      = "your-project-id"
-    tfc_agent_token = "your-tfc-agent-token"
+    project_id   = "your-project-id"
+    tfc_org_name = "your-tfc-org-name"
     ```
 
-1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use the [tfc-agent-gke-simple](../tfc-agent-gke-simple/README.md) for working with the default Terraform Agent image.
+1. Build the example Terraform Cloud agent image using Google Cloud Build. Alternatively, you can also use the [tfc-agent-gke-simple](../tfc-agent-gke-simple/README.md) for working with the default Terraform agent image.
 
     ```sh
     # Export required variables
@@ -43,15 +43,15 @@ If running from your own system, you will need:
     gcloud services enable artifactregistry.googleapis.com
     gcloud components update
 
-    # Create the Google Artifact Repository for storing the Agent
+    # Create the Google Artifact Repository for storing the agent
     gcloud artifacts repositories create $REPOSITORY --location="$LOCATION" --repository-format="DOCKER" 
 
-    # Build the custom Terraform Cloud Agent image using Cloud Build
+    # Build the custom Terraform Cloud agent image using Cloud Build
     gcloud builds submit --config=cloudbuild.yaml \
     --substitutions=_LOCATION="$LOCATION",_REPOSITORY="$REPOSITORY",_IMAGE="$IMAGE",_VERSION="$VERSION" .
     ```
 
-1. Initialize the Terraform Cloud Agent image for running Terraform.
+1. Initialize the Terraform Cloud agent image for running Terraform.
 
     ```sh
     export TF_VAR_tfc_agent_image=$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$VERSION
@@ -65,34 +65,34 @@ If running from your own system, you will need:
     terraform apply
     ```
 
-1. Your Terraform Cloud Agents should become active at Organization Setting > Security > Agents.
+1. Your Terraform Cloud agents should become active at Organization Setting > Security > Agents.
 
-1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud Agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
+1. Create additonal workspaces or use the existing workspace to run Terraform through the Terraform Cloud agent.[Click here for more info on running the workspace](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_run#example-usage).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| project\_id | The project id to deploy Terraform Cloud Agent | `string` | n/a | yes |
-| tfc\_agent\_image | The custom Terraform Cloud Agent image to use | `string` | n/a | yes |
-| tfc\_agent\_pool\_name | Terraform Cloud Agent pool name to be created | `string` | `"tfc-agent-gke-custom-pool"` | no |
-| tfc\_agent\_pool\_token\_description | Terraform Cloud Agent pool token description | `string` | `"tfc-agent-gke-custom-pool-token"` | no |
+| project\_id | The Google Cloud Platform project ID to deploy Terraform Cloud agent cluster | `string` | n/a | yes |
+| tfc\_agent\_image | The custom Terraform Cloud agent image to use | `string` | n/a | yes |
+| tfc\_agent\_pool\_name | Terraform Cloud agent pool name to be created | `string` | `"tfc-agent-gke-custom-pool"` | no |
+| tfc\_agent\_pool\_token\_description | Terraform Cloud agent pool token description | `string` | `"tfc-agent-gke-custom-pool-token"` | no |
 | tfc\_org\_name | Terraform Cloud org name where the agent pool will be created | `string` | n/a | yes |
-| tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP Agents GKE"` | no |
+| tfc\_project\_name | Terraform Cloud project name to be created | `string` | `"GCP agents GKE"` | no |
 | tfc\_workspace\_name | Terraform Cloud workspace name to be created | `string` | `"tfc-agent-gke-custom"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| ca\_certificate | The cluster ca certificate (base64 encoded) |
+| ca\_certificate | The cluster CA certificate (base64 encoded) |
 | client\_token | The bearer token for auth |
-| cluster\_name | Cluster name |
+| cluster\_name | GKE cluster name |
 | kubernetes\_endpoint | The cluster endpoint |
-| location | Cluster location |
-| network\_name | Name of VPC |
-| service\_account | The default service account used for running nodes. |
-| subnet\_name | Name of VPC |
+| location | GKE cluster location |
+| network\_name | Name of the VPC |
+| service\_account | The default service account used for TFC agent nodes |
+| subnet\_name | Name of the subnet in the VPC |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
