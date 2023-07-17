@@ -2,7 +2,7 @@
 
 variable "project_id" {
   type        = string
-  description = "The Google Cloud Platform project id to use"
+  description = "The Google Cloud Platform project ID to use"
 }
 
 variable "service_list" {
@@ -35,7 +35,7 @@ variable "pool_description" {
 
 variable "provider_id" {
   type        = string
-  description = "Workload Identity Pool Provider id"
+  description = "Workload Identity Pool Provider ID"
 }
 
 variable "provider_display_name" {
@@ -50,21 +50,20 @@ variable "provider_description" {
   default     = "Workload Identity Pool Provider managed by Terraform"
 }
 
+
+# For more info please see
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool_provider
 variable "attribute_condition" {
   type        = string
-  description = <<-EOF
-    Workload Identity Pool Provider attribute condition expression. 
-    [More info](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool_provider#attribute_condition)
-  EOF
+  description = "Workload Identity Pool Provider attribute condition expression"
   default     = ""
 }
 
+# For more info please see
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool_provider
 variable "attribute_mapping" {
   type        = map(any)
-  description = <<-EOF
-    Workload Identity Pool Provider attribute mapping. 
-    [More info](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iam_workload_identity_pool_provider#attribute_mapping)
-    EOF
+  description = "Workload Identity Pool Provider attribute mapping"
   default = {
     "google.subject"                        = "assertion.sub",
     "attribute.aud"                         = "assertion.aud",
@@ -82,35 +81,36 @@ variable "attribute_mapping" {
 
 variable "allowed_audiences" {
   type        = list(string)
-  description = "Workload Identity Pool Provider allowed audiences."
+  description = "Workload Identity Pool Provider allowed audiences"
   default     = []
 }
 
 variable "issuer_uri" {
   type        = string
   description = <<-EOF
-    Workload Identity Pool Issuer URL for Terraform Cloud/Enterprise. The default audience format used by TFC is of the form
-    //iam.googleapis.com/projects/{project number}/locations/global/workloadIdentityPools/{pool ID}/providers/{provider ID}
-    which matches with the default accepted audience format on GCP.
+    Workload Identity Pool Issuer URL for Terraform Cloud/Enterprise. 
+    The default audience format used by TFC is of the form
+    //iam.googleapis.com/projects/{project_id}/locations/global/workloadIdentityPools/{pool_id}/providers/{provider_id}
+    which matches with the default accepted audience format on GCP
   EOF
   default     = "https://app.terraform.io"
 }
 
 variable "tfc_organization_name" {
   type        = string
-  description = "The name of your Terraform Cloud organization"
+  description = "The Terraform Cloud organization to use"
 }
 
 variable "tfc_project_name" {
   type        = string
   default     = "Default Project"
-  description = "The Terraform Cloud project to authorize via OIDC"
+  description = "The Terraform Cloud project to use"
 }
 
 variable "tfc_workspace_name" {
   type        = string
   default     = "gcp-oidc-workspace"
-  description = "The name of the Terraform Cloud workspace to authorize via OIDC"
+  description = "The Terraform Cloud workspace to authorize via OIDC"
 }
 
 variable "sa_mapping" {
@@ -121,7 +121,7 @@ variable "sa_mapping" {
   }))
   description = <<-EOF
     Service Account resource names and corresponding WIF provider attributes. 
-    If attribute is set to `*` all identities in the pool are granted access to SAs.
+    If attribute is set to `*` all identities in the pool are granted access to SAs
   EOF
   default     = {}
 }
