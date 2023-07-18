@@ -28,7 +28,6 @@ resource "local_file" "terraform_vars" {
   ca_certificate="${module.tfc_agent_gke.ca_certificate}"
   tfc_org_name="${data.tfe_organization.tfc_org.name}"
   tfc_team_token="${tfe_team_token.tfc_team_token.token}"
-  tfc_agent_k8s_secrets="${module.tfc_agent_gke.tfc_agent_k8s_secrets}"
   EOF
 }
 
