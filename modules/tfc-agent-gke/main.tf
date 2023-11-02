@@ -82,20 +82,36 @@ data "google_client_config" "default" {
 }
 
 resource "kubernetes_secret" "tfc_agent_secrets" {
+  count = var.tfc_operator_create ? 0 : 1
   metadata {
-    name = var.tfc_agent_k8s_secrets
+    name      = var.tfc_agent_k8s_secrets
+    namespace = var.tfc_agent_k8s_secrets_namespace
   }
   data = {
-    tfc_agent_address     = var.tfc_agent_address
-    tfc_agent_token       = var.tfc_agent_token
-    tfc_agent_single      = var.tfc_agent_single
-    tfc_agent_auto_update = var.tfc_agent_auto_update
-    tfc_agent_name        = local.tfc_agent_name
+    TFC_ADDRESS           = var.tfc_agent_address
+    TFC_AGENT_TOKEN       = var.tfc_agent_token
+    TFC_AGENT_SINGLE      = var.tfc_agent_single
+    TFC_AGENT_AUTO_UPDATE = var.tfc_agent_auto_update
+    TFC_AGENT_NAME        = local.tfc_agent_name
   }
 }
 
-# Deploy the agent
+# Deploy the Terraform Cloud Operator
+# Note: The Helm Release name for the Operator cannot start with "tfc-agent"
+resource "helm_release" "tfc_operator" {
+  count            = var.tfc_operator_create ? 1 : 0
+  repository       = "https://helm.releases.hashicorp.com"
+  chart            = "terraform-cloud-operator"
+  name             = "tfc-operator-release"
+  namespace        = "terraform-cloud-operator-system"
+  create_namespace = var.tfc_operator_create_namespace
+  version          = var.tfc_operator_version
+  values           = var.tfc_operator_values
+}
+
+# Deploy the Agent
 resource "kubernetes_deployment" "tfc_agent_deployment" {
+  count = var.tfc_operator_create ? 0 : 1
   metadata {
     name = "${local.tfc_agent_name}-deployment"
   }
@@ -107,7 +123,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
       }
     }
 
-    replicas = 2
+    replicas = var.tfc_agent_replicas
 
     template {
       metadata {
@@ -186,6 +202,7 @@ resource "kubernetes_deployment" "tfc_agent_deployment" {
 
 # Deploy a horizontal pod autoscaler for the agent
 resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
+  count = var.tfc_operator_create ? 0 : 1
   metadata {
     name = "${local.tfc_agent_name}-deployment-hpa"
   }
@@ -196,8 +213,8 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
       name = "${local.tfc_agent_name}-deployment"
     }
 
-    min_replicas = 2
-    max_replicas = 10
+    min_replicas = var.tfc_agent_min_replicas
+    max_replicas = var.tfc_agent_max_replicas
 
     metric {
       type = "Resource"
@@ -207,7 +224,7 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "tfc_agent_hpa" {
 
         target {
           type                = "Utilization"
-          average_utilization = 50
+          average_utilization = var.tfc_agent_average_utilization
         }
       }
     }

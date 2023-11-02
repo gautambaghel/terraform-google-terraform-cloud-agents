@@ -39,15 +39,24 @@ This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 | service\_account | Optional Service Account for the GKE nodes | `string` | `""` | no |
 | subnet\_ip | IP range for the subnet | `string` | `"10.0.0.0/17"` | no |
 | subnet\_name | Name for the subnet | `string` | `"tfc-agent-subnet"` | no |
-| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API | `string` | `"https://app.terraform.io"` | no |
-| tfc\_agent\_auto\_update | Controls automatic core updates behavior. Acceptable values include disabled, patch, and minor | `string` | `"minor"` | no |
-| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud agent container | `string` | `"2"` | no |
-| tfc\_agent\_image | The Terraform Cloud agent image to use | `string` | `"hashicorp/tfc-agent:latest"` | no |
-| tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC agent on GKE | `string` | `"tfc-agent-k8s-secrets"` | no |
-| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud agent container | `string` | `"2Gi"` | no |
-| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent | `string` | `"tfc-agent-k8s"` | no |
-| tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. | `bool` | `false` | no |
-| tfc\_agent\_token | Terraform Cloud agent token. (Organization Settings >> Agents) | `string` | n/a | yes |
+| tfc\_agent\_address | The HTTP or HTTPS address of the Terraform Cloud/Enterprise API. Does not apply if using operator | `string` | `"https://app.terraform.io"` | no |
+| tfc\_agent\_auto\_update | Controls automatic core updates behavior. <br>Acceptable values include disabled, patch, and minor. <br>Does not apply if using operator | `string` | `"minor"` | no |
+| tfc\_agent\_average\_utilization | Average CPU utilization for the Terraform Cloud Agent for autoscaling. <br>Does not apply if using operator | `string` | `"50"` | no |
+| tfc\_agent\_cpu\_request | CPU request for the Terraform Cloud agent container. Does not apply if using operator | `string` | `"2"` | no |
+| tfc\_agent\_image | The Terraform Cloud agent image to use. Does not apply if using operator | `string` | `"hashicorp/tfc-agent:latest"` | no |
+| tfc\_agent\_k8s\_secrets | Name for the k8s secret required to configure TFC agent on GKE. Does not apply if using operator | `string` | `"tfc-agent-k8s-secrets"` | no |
+| tfc\_agent\_k8s\_secrets\_namespace | Name for the k8s secret required to configure TFC agent on GKE. Does not apply if using operator | `string` | `"terraform-cloud-operator-system"` | no |
+| tfc\_agent\_max\_replicas | Maximum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator | `string` | `"10"` | no |
+| tfc\_agent\_memory\_request | Memory request for the Terraform Cloud agent container. Does not apply if using operator | `string` | `"2Gi"` | no |
+| tfc\_agent\_min\_replicas | Minimum replicas for the Terraform Cloud Agent pod autoscaler. Does not apply if using operator | `string` | `"2"` | no |
+| tfc\_agent\_name\_prefix | This name may be used in the Terraform Cloud user interface to help easily identify the agent. <br>Does not apply if using operator | `string` | `"tfc-agent-k8s"` | no |
+| tfc\_agent\_replicas | Deployment replicas for Terraform Cloud Agent. Does not apply if using operator | `string` | `"2"` | no |
+| tfc\_agent\_single | Enable single mode. This causes the agent to handle at most one job and<br>immediately exit thereafter. Useful for running agents as ephemeral<br>containers, VMs, or other isolated contexts with a higher-level scheduler<br>or process supervisor. Does not apply if using operator | `bool` | `false` | no |
+| tfc\_agent\_token | Terraform Cloud Agent token. (TFC Organization Settings >> Agents). <br>Does not apply if using operator | `string` | `""` | no |
+| tfc\_operator\_create | Set true, if using the Terraform Cloud Operator | `bool` | `false` | no |
+| tfc\_operator\_create\_namespace | Set true, creates a namespace for the Terraform Cloud Operator | `bool` | `true` | no |
+| tfc\_operator\_values | The values.yaml file used for deploying Terraform Cloud Operator | `any` | `{}` | no |
+| tfc\_operator\_version | Terraform Cloud Operator version | `string` | `"2.0.0-beta7"` | no |
 | zones | The GCP zone to use when deploying resources | `list(string)` | <pre>[<br>  "us-central1-a"<br>]</pre> | no |
 
 ## Outputs
@@ -62,6 +71,8 @@ This example shows how to deploy a custom Terraform Cloud agent image with GKE.
 | network\_name | Name of the VPC |
 | service\_account | The default service account used for TFC agent nodes |
 | subnet\_name | Name of the subnet in the VPC |
+| tfc\_agent\_k8s\_secrets | Name for the k8s secret that configures TFC Agent on GKE |
+| tfc\_agent\_pool\_name | Generated name for the TFC Agent pool |
 
  <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
